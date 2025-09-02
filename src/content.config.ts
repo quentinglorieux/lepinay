@@ -1,14 +1,14 @@
 // src/content.config.ts
 import { defineCollection, z } from 'astro:content';
+import { file } from 'astro/loaders';
 
-// Collection de projets
 const projects = defineCollection({
   schema: ({ image }) =>
     z.object({
       title: z.string(),
       year: z.coerce.number().optional(),
-      cover: image().optional(),            // cover devient un objet avec .src
-      gallery: z.array(image()).optional(), // idem pour la galerie
+      cover: image().optional(),
+      gallery: z.array(image()).optional(),
       city: z.string().optional(),
       categories: z.array(z.string()).optional(),
       tags: z.array(z.string()).optional(),

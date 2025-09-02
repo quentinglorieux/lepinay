@@ -1,13 +1,16 @@
 ---
 const nav = [
-  { href: '/', label: 'Accueil' },
-  { href: '/#projets', label: 'Projets' },
-  { href: '/qui-sommes-nous', label: 'Qui sommes-nous' },
-  { href: '/actu', label: 'Actualités' },
+  // { href: '/', label: 'Accueil' },
+  { href: '/#projets', label: 'PROJETS' },
+  { href: '/qui-sommes-nous', label: 'AGENCE' },
+  { href: '/actu', label: 'ACTUALITÉS' },
 ];
 ---
 <header class="site container">
-  <a href="/" aria-label="Logo – Agence"><strong>AGENCE PIERRE LEPINAY</strong></a>
+<a href="/" class="logo">
+  <img src="/logo.svg" alt="Logo de l’agence" width="400" height="auto" />
+</a>
+  <!-- <a href="/" aria-label="Logo – Agence"><strong>AGENCE PIERRE LEPINAY</strong></a> -->
   <nav>
     {nav.map(n => <a href={n.href}>{n.label}</a>)}
   </nav>

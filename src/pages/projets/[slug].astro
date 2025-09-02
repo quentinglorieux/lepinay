@@ -10,9 +10,9 @@ export async function getStaticPaths() {
     params: { slug: p.slug },
     props: {
       project: p,
-      prev: idx > 0 ? projects[idx-1] : null,
-      next: idx < projects.length - 1 ? projects[idx+1] : null,
-    }
+      prev: idx > 0 ? projects[idx - 1] : null,
+      next: idx < projects.length - 1 ? projects[idx + 1] : null,
+    },
   }));
 }
 
@@ -20,51 +20,111 @@ const { project, prev, next } = Astro.props;
 const d = project.data;
 const { Content } = await project.render();
 
+// Auto-import des images si gallery vide
+let gallery = d.gallery;
+if (!gallery || gallery.length === 0) {
+  const allImages = import.meta.glob(
+    '../../content/projects/**/images/*.{png,jpg,jpeg,webp}',
+    { eager: true, import: 'default' }
+  );
+
+  // Debug : affiche toutes les clés
+  console.log(Object.keys(allImages));
+
+  gallery = Object.entries(allImages)
+    .filter(([path]) => path.includes(`projects/${project.slug}/images/`))
+    .map(([_, mod]) => mod);
+}
+
 // Helpers
 const subtitle = `${d.city ? d.city + ' — ' : ''}${d.year}`;
-const cats = (d.categories||[]).join(', ');
+const cats = (d.categories || []).join(', ');
 ---
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{d.title} — Projets</title>
-    <meta name="description" content={d?.seo?.description || `${d.title} — ${subtitle}`} />
+    <meta
+      name="description"
+      content={d?.seo?.description || `${d.title} — ${subtitle}`}
+    />
     <meta property="og:title" content={`${d.title} — Projets`} />
     <meta property="og:description" content={d?.seo?.description || ''} />
     {d.cover && <meta property="og:image" content={d.cover.src} />}
-    <script type="application/ld+json" set:html={JSON.stringify({
-      '@context':'https://schema.org',
-      '@type':'CreativeWork',
-      name: d.title,
-      locationCreated: d.city || undefined,
-      dateCreated: d.year ? String(d.year) : undefined,
-      image: d.cover?.src || undefined,
-      about: cats || undefined
-    })} />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'CreativeWork',
+        name: d.title,
+        locationCreated: d.city || undefined,
+        dateCreated: d.year ? String(d.year) : undefined,
+        image: d.cover?.src || undefined,
+        about: cats || undefined,
+      })}
+    />
   </head>
   <body>
     <Header />
     <main class="container">
       <nav style="margin:12px 0 6px;font-size:.95rem">
-        <a href="/">Accueil</a> / <a href="/#projets">Projets</a> / <span aria-current="page">{d.title}</span>
+        <a href="/">Accueil</a> / <a href="/#projets">Projets</a> /
+        <span aria-current="page">{d.title}</span>
       </nav>
 
       <div class="project-header">
         <div class="project-title">
           <h1 style="margin:0 0 8px">{d.title}</h1>
           <dl class="info-grid" aria-label="Informations clés du projet">
-            {d.city && <><dt>Ville</dt><dd>{d.city}</dd></>}
-            <dt>Année</dt><dd>{d.year}</dd>
-            {d.surface && <><dt>Surface</dt><dd>{d.surface}</dd></>}
-            {d.budget && <><dt>Budget</dt><dd>{d.budget}</dd></>}
-            {d.client && <><dt>Maîtrise d’ouvrage</dt><dd>{d.client}</dd></>}
-            {(d.categories?.length>0) && <><dt>Catégories</dt><dd>{d.categories.join(', ')}</dd></>}
-            {(d.tags?.length>0) && <><dt>Tags</dt><dd>{d.tags.join(', ')}</dd></>}
+            {d.city && (
+              <>
+                <dt>Ville</dt>
+                <dd>{d.city}</dd>
+              </>
+            )}
+            <dt>Année</dt>
+            <dd>{d.year}</dd>
+            {d.surface && (
+              <>
+                <dt>Surface</dt>
+                <dd>{d.surface}</dd>
+              </>
+            )}
+            {d.budget && (
+              <>
+                <dt>Budget</dt>
+                <dd>{d.budget}</dd>
+              </>
+            )}
+            {d.client && (
+              <>
+                <dt>Maîtrise d’ouvrage</dt>
+                <dd>{d.client}</dd>
+              </>
+            )}
+            {d.categories?.length > 0 && (
+              <>
+                <dt>Catégories</dt>
+                <dd>{d.categories.join(', ')}</dd>
+              </>
+            )}
+            {d.tags?.length > 0 && (
+              <>
+                <dt>Tags</dt>
+                <dd>{d.tags.join(', ')}</dd>
+              </>
+            )}
           </dl>
         </div>
         <aside class="project-aside">
-          {d.cover && <img src={d.cover.src} alt={`Image principale — ${d.title}`} loading="eager" />}
+          {d.cover && (
+            <img
+              src={d.cover.src}
+              alt={`Image principale — ${d.title}`}
+              loading="eager"
+            />
+          )}
         </aside>
       </div>
 
@@ -72,20 +132,43 @@ const cats = (d.categories||[]).join(', ');
         <Content />
       </article>
 
-      {d.gallery?.length>0 && (
-        <section aria-label="Galerie d’images du projet" style="margin:24px 0 40px">
-          <div class="gallery">
-            {d.gallery.map((g)=> (
-              <a href={g.src} target="_blank" rel="noopener" aria-label={`Agrandir l’image de ${d.title}`}>
-                <img src={g.src} alt={d.title} loading="lazy"/>
+      {gallery?.length > 0 && (
+        <section
+          aria-label="Galerie d’images du projet"
+          style="margin:24px 0 40px"
+        >
+          <div id="pswp-gallery" class="gallery">
+            {gallery.map((g: any) => (
+              <a
+                href={g.src}
+                data-pswp-width={g.width}
+                data-pswp-height={g.height}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`Agrandir l’image de ${d.title}`}
+              >
+                <img src={g.src} alt={d.title} loading="lazy" />
               </a>
             ))}
           </div>
+          <script>
+            import PhotoSwipeLightbox from 'photoswipe/lightbox';
+            import 'photoswipe/style.css';
+            const lightbox = new PhotoSwipeLightbox({
+              gallery: '#pswp-gallery',
+              children: 'a',
+              pswpModule: () => import('photoswipe'),
+            });
+            lightbox.init();
+          </script>
         </section>
       )}
 
       {(prev || next) && (
-        <nav style="display:flex;justify-content:space-between;gap:16px;margin:14px 0 30px" aria-label="Navigation projets">
+        <nav
+          style="display:flex;justify-content:space-between;gap:16px;margin:14px 0 30px"
+          aria-label="Navigation projets"
+        >
           <div>
             {prev && <a href={`/projets/${prev.slug}`}>&larr; {prev.data.title}</a>}
           </div>

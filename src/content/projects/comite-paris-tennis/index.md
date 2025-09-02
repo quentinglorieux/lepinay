@@ -1,6 +1,6 @@
 ---
 title: Comité de Paris de Tennis
-slug: tennis-paris-2024
+slug: comite-paris-tennis
 status: réalisé
 year: 2024
 city: Paris
@@ -16,9 +16,6 @@ client: Privé
 categories: [Bâtiment]
 tags: [bois, réhabilitation]
 cover: ./cover.png
-gallery:
-  - ./images/01.png
-  - ./images/02.png
 seo:
   description: Réhabilitation et extension du comité de Paris de Tennis.
 ---

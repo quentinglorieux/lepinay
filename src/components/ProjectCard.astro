@@ -1,0 +1,19 @@
+---
+interface Props {
+  href: string;
+  title: string;
+  subtitle?: string; // ex: "Bordeaux — 2023"
+  meta?: string;     // ex: "Maisons, bois"
+  cover?: string;
+}
+const { href, title, subtitle, meta, cover } = Astro.props;
+---
+<a class="card" href={href} aria-label={title}>
+  {cover ? <img src={cover} alt={title} loading="lazy"/> : null}
+  <div class="overlay"/>
+  <div class="meta">
+    <div class="l1">{title}</div>
+    {subtitle && <div class="l2">{subtitle}</div>}
+    {meta && <div class="l3">{meta}</div>}
+  </div>
+</a>

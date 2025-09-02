@@ -1,0 +1,94 @@
+---
+import '../styles/global.css';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+
+const { slug } = Astro.params;
+const projects = await getCollection('projects');
+const idx = projects.findIndex((p)=> p.data.slug === slug);
+if (idx === -1) throw new Error('Projet introuvable');
+
+const project = projects[idx];
+const d = project.data;
+const prev = idx > 0 ? projects[idx-1] : null;
+const next = idx < projects.length-1 ? projects[idx+1] : null;
+
+// Helpers
+const subtitle = `${d.city ? d.city + ' — ' : ''}${d.year}`;
+const cats = (d.categories||[]).join(', ');
+---
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{d.title} — Projets</title>
+    <meta name="description" content={d?.seo?.description || `${d.title} — ${subtitle}`} />
+    <meta property="og:title" content={`${d.title} — Projets`} />
+    <meta property="og:description" content={d?.seo?.description || ''} />
+    {d.cover && <meta property="og:image" content={d.cover} />}
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context':'https://schema.org',
+      '@type':'CreativeWork',
+      name: d.title,
+      locationCreated: d.city || undefined,
+      dateCreated: d.year ? String(d.year) : undefined,
+      image: d.cover || undefined,
+      about: cats || undefined
+    })} />
+  </head>
+  <body>
+    <Header />
+    <main class="container">
+      <nav style="margin:12px 0 6px;font-size:.95rem">
+        <a href="/">Accueil</a> / <a href="/#projets">Projets</a> / <span aria-current="page">{d.title}</span>
+      </nav>
+
+      <div class="project-header">
+        <div class="project-title">
+          <h1 style="margin:0 0 8px">{d.title}</h1>
+          <dl class="info-grid" aria-label="Informations clés du projet">
+            {d.city && <><dt>Ville</dt><dd>{d.city}</dd></>}
+            <dt>Année</dt><dd>{d.year}</dd>
+            {d.surface && <><dt>Surface</dt><dd>{d.surface}</dd></>}
+            {d.budget && <><dt>Budget</dt><dd>{d.budget}</dd></>}
+            {d.client && <><dt>Maîtrise d’ouvrage</dt><dd>{d.client}</dd></>}
+            {(d.categories?.length>0) && <><dt>Catégories</dt><dd>{d.categories.join(', ')}</dd></>}
+            {(d.tags?.length>0) && <><dt>Tags</dt><dd>{d.tags.join(', ')}</dd></>}
+          </dl>
+        </div>
+        <aside class="project-aside">
+          {d.cover && <img src={d.cover} alt={`Image principale — ${d.title}`} loading="eager" />}
+        </aside>
+      </div>
+
+      <article class="prose" style="margin:12px 0 24px">
+        <Content />
+      </article>
+
+      {d.gallery?.length>0 && (
+        <section aria-label="Galerie d’images du projet" style="margin:24px 0 40px">
+          <div class="gallery">
+            {d.gallery.map((g)=> (
+              <a href={g} target="_blank" rel="noopener" aria-label={`Agrandir l’image de ${d.title}`}>
+                <img src={g} alt={d.title} loading="lazy"/>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {(prev || next) && (
+        <nav style="display:flex;justify-content:space-between;gap:16px;margin:14px 0 30px" aria-label="Navigation projets">
+          <div>
+            {prev && <a href={`/projets/${prev.data.slug}`}>&larr; {prev.data.title}</a>}
+          </div>
+          <div>
+            {next && <a href={`/projets/${next.data.slug}`}>{next.data.title} &rarr;</a>}
+          </div>
+        </nav>
+      )}
+    </main>
+    <Footer />
+  </body>
+</html>

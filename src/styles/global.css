@@ -1,0 +1,47 @@
+:root{
+  --bg:#ffffff;--fg:#111111;--muted:#666;--accent:#8a8a8a;--overlay:rgba(0,0,0,.3);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Apple Color Emoji","Segoe UI Emoji"}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.container{max-width:1200px;margin:0 auto;padding:0 20px}
+header.site{display:flex;align-items:center;justify-content:space-between;padding:18px 0;border-bottom:1px solid #eee}
+nav a{margin-left:18px}
+.grid{display:grid;gap:12px}
+/* 3-4 colonnes responsives */
+.grid.projects{grid-template-columns:repeat(4,1fr)}
+@media (max-width:1100px){.grid.projects{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:800px){.grid.projects{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.grid.projects{grid-template-columns:1fr}}
+
+/* Carte projet carrée */
+.card{position:relative;aspect-ratio:1/1;overflow:hidden;background:#f4f4f4}
+.card img{width:100%;height:100%;object-fit:cover;filter:grayscale(100%);transition:transform .3s ease}
+.card:hover img{transform:scale(1.04)}
+.card .overlay{position:absolute;inset:0;background:var(--overlay);opacity:0;transition:opacity .25s ease}
+.card:hover .overlay{opacity:1}
+.card .meta{position:absolute;left:10px;right:10px;bottom:10px;color:#fff;line-height:1.25}
+.card .meta .l1{font-weight:600}
+.card .meta .l2,.card .meta .l3{font-size:.9rem;color:#eaeaea}
+
+/* Barre de filtres */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+.filters .chip{border:1px solid #ddd;padding:6px 10px;border-radius:999px;cursor:pointer}
+.filters .chip.active{background:#111;color:#fff;border-color:#111}
+
+/* Page projet */
+.project-header{display:flex;gap:28px;align-items:flex-start;margin:28px 0}
+.project-title{flex:1}
+.project-aside{width:44%}
+@media (max-width:900px){.project-header{flex-direction:column}.project-aside{width:100%}}
+
+.info-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px 18px;margin:14px 0}
+.info-grid dt{color:var(--muted)}
+.info-grid dd{margin:0}
+
+.gallery{display:grid;gap:10px;grid-template-columns:repeat(3,1fr)}
+@media (max-width:900px){.gallery{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.gallery{grid-template-columns:1fr}}
+.gallery a{display:block;overflow:hidden}
+.gallery img{width:100%;height:100%;object-fit:cover}

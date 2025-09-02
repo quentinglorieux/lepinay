@@ -4,7 +4,9 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { getCollection } from 'astro:content';
 
-const posts = (await getCollection('posts')).sort((a,b)=> (a.data.date < b.data.date ? 1 : -1));
+const posts = (await getCollection('posts')).sort((a,b)=>
+  new Date(b?.data?.date || '1970-01-01').getTime() - new Date(a?.data?.date || '1970-01-01').getTime()
+);
 ---
 <html lang="fr">
   <head>
@@ -18,7 +20,7 @@ const posts = (await getCollection('posts')).sort((a,b)=> (a.data.date < b.data.
       <h1>Actualités</h1>
       <div class="grid" style="grid-template-columns:repeat(3,1fr)">
         {posts.map(p => (
-          <a href={`/actu/${p.data.slug}`} style="border:1px solid #eee;padding:12px">
+          <a href={`/actu/${p.slug}`} style="border:1px solid #eee;padding:12px">
             {p.data.cover && <img src={p.data.cover} alt={p.data.title} loading="lazy"/>}
             <h3 style="margin:10px 0 6px">{p.data.title}</h3>
             <div style="color:var(--muted);font-size:.9rem">

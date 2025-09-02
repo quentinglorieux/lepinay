@@ -1,18 +1,24 @@
 ---
-import '../styles/global.css';
+import '../../styles/global.css';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { getCollection } from 'astro:content';
 
-const { slug } = Astro.params;
-const projects = await getCollection('projects');
-const idx = projects.findIndex((p)=> p.data.slug === slug);
-if (idx === -1) throw new Error('Projet introuvable');
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((p, idx) => ({
+    params: { slug: p.slug },
+    props: {
+      project: p,
+      prev: idx > 0 ? projects[idx-1] : null,
+      next: idx < projects.length - 1 ? projects[idx+1] : null,
+    }
+  }));
+}
 
-const project = projects[idx];
+const { project, prev, next } = Astro.props;
 const d = project.data;
-const prev = idx > 0 ? projects[idx-1] : null;
-const next = idx < projects.length-1 ? projects[idx+1] : null;
+const { Content } = await project.render();
 
 // Helpers
 const subtitle = `${d.city ? d.city + ' — ' : ''}${d.year}`;
@@ -26,14 +32,14 @@ const cats = (d.categories||[]).join(', ');
     <meta name="description" content={d?.seo?.description || `${d.title} — ${subtitle}`} />
     <meta property="og:title" content={`${d.title} — Projets`} />
     <meta property="og:description" content={d?.seo?.description || ''} />
-    {d.cover && <meta property="og:image" content={d.cover} />}
+    {d.cover && <meta property="og:image" content={d.cover.src} />}
     <script type="application/ld+json" set:html={JSON.stringify({
       '@context':'https://schema.org',
       '@type':'CreativeWork',
       name: d.title,
       locationCreated: d.city || undefined,
       dateCreated: d.year ? String(d.year) : undefined,
-      image: d.cover || undefined,
+      image: d.cover?.src || undefined,
       about: cats || undefined
     })} />
   </head>
@@ -58,7 +64,7 @@ const cats = (d.categories||[]).join(', ');
           </dl>
         </div>
         <aside class="project-aside">
-          {d.cover && <img src={d.cover} alt={`Image principale — ${d.title}`} loading="eager" />}
+          {d.cover && <img src={d.cover.src} alt={`Image principale — ${d.title}`} loading="eager" />}
         </aside>
       </div>
 
@@ -70,8 +76,8 @@ const cats = (d.categories||[]).join(', ');
         <section aria-label="Galerie d’images du projet" style="margin:24px 0 40px">
           <div class="gallery">
             {d.gallery.map((g)=> (
-              <a href={g} target="_blank" rel="noopener" aria-label={`Agrandir l’image de ${d.title}`}>
-                <img src={g} alt={d.title} loading="lazy"/>
+              <a href={g.src} target="_blank" rel="noopener" aria-label={`Agrandir l’image de ${d.title}`}>
+                <img src={g.src} alt={d.title} loading="lazy"/>
               </a>
             ))}
           </div>
@@ -81,10 +87,10 @@ const cats = (d.categories||[]).join(', ');
       {(prev || next) && (
         <nav style="display:flex;justify-content:space-between;gap:16px;margin:14px 0 30px" aria-label="Navigation projets">
           <div>
-            {prev && <a href={`/projets/${prev.data.slug}`}>&larr; {prev.data.title}</a>}
+            {prev && <a href={`/projets/${prev.slug}`}>&larr; {prev.data.title}</a>}
           </div>
           <div>
-            {next && <a href={`/projets/${next.data.slug}`}>{next.data.title} &rarr;</a>}
+            {next && <a href={`/projets/${next.slug}`}>{next.data.title} &rarr;</a>}
           </div>
         </nav>
       )}

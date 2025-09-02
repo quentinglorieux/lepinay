@@ -97,24 +97,31 @@ const cats = (d.categories || []).join(', ');
                 <dd>{d.budget}</dd>
               </>
             )}
-            {d.client && (
+            {d['maitrise_ouvrage'] && (
               <>
                 <dt>Maîtrise d’ouvrage</dt>
-                <dd>{d.client}</dd>
+                <dd>{d['maitrise_ouvrage']}</dd>
               </>
             )}
-            {d.categories?.length > 0 && (
+            {d['maitre_oeuvre'] && (
               <>
-                <dt>Catégories</dt>
-                <dd>{d.categories.join(', ')}</dd>
+                <dt>Maître d’œuvre</dt>
+                <dd>{d['maitre_oeuvre']}</dd>
               </>
             )}
-            {d.tags?.length > 0 && (
+            {d['architecte'] && (
               <>
-                <dt>Tags</dt>
-                <dd>{d.tags.join(', ')}</dd>
+                <dt>Architecte</dt>
+                <dd>{d['architecte']}</dd>
               </>
             )}
+            {d['bureau_etude'] && (
+              <>
+                <dt>Bureaux d’étude</dt>
+                <dd>{Array.isArray(d['bureau_etude']) ? d['bureau_etude'].join(', ') : d['bureau_etude']}</dd>
+              </>
+            )}
+
           </dl>
         </div>
         <aside class="project-aside">
@@ -150,6 +157,7 @@ const cats = (d.categories || []).join(', ');
                 <img src={g.src} alt={d.title} loading="lazy" />
               </a>
             ))}
+            
           </div>
           <script>
             import PhotoSwipeLightbox from 'photoswipe/lightbox';
@@ -162,6 +170,7 @@ const cats = (d.categories || []).join(', ');
             lightbox.init();
           </script>
         </section>
+        
       )}
 
       {(prev || next) && (
@@ -177,6 +186,7 @@ const cats = (d.categories || []).join(', ');
           </div>
         </nav>
       )}
+
     </main>
     <Footer />
   </body>

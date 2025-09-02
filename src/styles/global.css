@@ -4,7 +4,7 @@
   --muted: #666;
   --accent: #8a8a8a;
   --text: #111111;
-  --overlay: rgba(255, 255, 255, 0.5);
+  --overlay: rgba(240, 238, 238, 0.7);
 }
 * {
   box-sizing: border-box;
@@ -80,7 +80,7 @@ nav a {
   transition: transform 0.3s ease;
 }
 .card:hover img {
-  transform: scale(1.04);
+  transform: scale(1.02);
 }
 .card .overlay {
   position: absolute;
@@ -97,17 +97,20 @@ nav a {
 }
 .card .meta {
   position: absolute;
-  left: 10px;
+  left: 15px;
   right: 10px;
-  bottom: 10px;
+  top: 30px;
   color: var(--text);
   line-height: 1.25;
   opacity: 0;
   transition: opacity 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 .card .meta .l1 {
   font-weight: 500;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
 }
 .card .meta .l2,
 .card .meta .l3 {
@@ -125,7 +128,7 @@ nav a {
 .filters .chip {
   border: 1px solid #ddd;
   padding: 6px 10px;
-  border-radius: 999px;
+  border-radius: 6px;
   cursor: pointer;
 }
 .filters .chip.active {

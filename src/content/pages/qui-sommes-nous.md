@@ -1,10 +1,24 @@
 ---
 title: "Qui sommes-nous"
 subtitle: "Une agence d’architecture tournée vers l’innovation et l’humain"
-
-seo:
-  description: "Présentation de l’agence d’architecture Pierre Lépinay : nos valeurs, notre équipe et notre démarche."
-  image: ./office.png
+cover: ./images/office.png
+associates:
+  - name: "Pierre Lépinay"
+    role: "Architecte associé"
+    bio: "Diplômé d’architecture, Pierre développe une approche contextuelle et sobre, attentive aux usages et aux ressources."
+    photo: ./images/PL.png
+    email: "pierre@exemple.fr"
+    cv: ./cv/pierre-lepinay.pdf
+    links:
+      linkedin: "https://www.linkedin.com/"
+  - name: "Garance Champlois"
+    role: "Architecte associée"
+    bio: "Garance dirige la stratégie de projet et la relation avec les maîtrises d’ouvrage."
+    photo: ./images/GC.png
+    email: "garance@exemple.fr"
+    cv: ./cv/garance-champlois.pdf
+    links:
+      linkedin: "https://www.linkedin.com/"
 ---
 
 
@@ -25,7 +39,7 @@ Notre travail couvre **tous types de programmes** :
 - paysage,  
 - réhabilitations et constructions neuves.  
 
----
+
 
 ## Une architecture sobre
 
@@ -36,3 +50,5 @@ Cela se traduit par une exigence forte en matière de :
 - qualité,  
 - fonctionnalité,  
 - durabilité des espaces construits.  
+
+---

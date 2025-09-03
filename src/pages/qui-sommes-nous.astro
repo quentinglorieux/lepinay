@@ -2,30 +2,65 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { getCollection, render } from 'astro:content';
 
-// Import direct du Markdown (en tant que composant Astro)
-import Page, { frontmatter } from '../content/pages/qui-sommes-nous.md';
-import hero from '../content/pages/office.png';
+// Charger la page via la collection `pages` pour bénéficier des images `image()`
+const pages = await getCollection('pages');
+const entry = pages.find((p) => p.id === 'qui-sommes-nous');
+if (!entry) {
+  throw new Error('Page `qui-sommes-nous` introuvable dans la collection `pages`.');
+}
+
+const { Content } = await render(entry);
+const d = entry.data as any; // d.title, d.subtitle, d.cover (image()), d.associates: [{ photo: image() }]
 ---
 
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
-    <title>{frontmatter.title}</title>
-    <meta name="description" content={frontmatter.seo?.description || ''} />
-    {frontmatter.seo?.image && <meta property="og:image" content={hero.src} />}
+    <title>{d.title}</title>
+    <meta name="description" content={d?.seo?.description || ''} />
+    {d.cover && <meta property="og:image" content={d.cover.src} />}
   </head>
   <body>
     <Header />
     <main class="container prose about">
-     {frontmatter.seo?.image && (
-        <img src={hero.src} alt={frontmatter.title} style="width:100%;height:auto;display:block;margin-bottom:2rem;" />
+     {d.cover && (
+        <img src={d.cover.src} alt={d.title} style="width:100%;height:auto;display:block;margin-bottom:2rem;" />
       )}
-      <Page />
+      <Content />
+      <section class="team" aria-label="Associés de l’agence">
+        <h2 class="team-title">Les associés</h2>
+        <div class="team-grid">
+          {(Array.isArray(d.associates) ? d.associates : (Array.isArray(d.members) ? d.members : [])).map((associate: any) => (
+            <article class="member">
+              <div class="photo-wrap">
+                {associate?.photo && <img src={associate.photo.src} alt={`Portrait de ${associate?.name || ''}`} loading="lazy" />}
+              </div>
+              <div class="member-body">
+                <h3 class="member-name">{associate.name}</h3>
+                {associate?.role && <p class="member-role">{associate.role}</p>}
+                {associate?.bio && <p class="member-bio">{associate.bio}</p>}
+                <p class="member-links" aria-label="Réseaux & documents">
+                  {associate?.links?.linkedin || associate?.linkedin ? (
+                    <a href={associate?.links?.linkedin || associate?.linkedin} target="_blank" rel="noreferrer noopener" class="link">LinkedIn</a>
+                  ) : null}
+                   </p>
+                   <p class="member-links" aria-label="Réseaux & documents">
+                  {associate?.email ? (
+                    <a href={`mailto:${associate.email}`} class="link">Email</a>
+                  ) : null}</p>
+                  <p class="member-links cv">
+                  {associate?.cv ? (
+                    <a href={associate.cv} class="cv" download>Télécharger le CV</a>
+                  ) : null}
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
     </main>
     <Footer />
   </body>
 </html>
-<style>
-
-</style>

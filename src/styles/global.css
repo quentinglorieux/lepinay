@@ -160,6 +160,17 @@ nav a {
   color: var(--text);
 }
 
+.meta .l2{
+  font-size: 1rem;
+  color: var(--text);
+  font-variant: small-caps;
+}
+
+.meta .l3 {
+  font-size: 1rem;
+  color: var(--text);
+}
+
 /* Barre de filtres */
 .filters {
   display: flex;

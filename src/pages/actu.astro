@@ -7,6 +7,22 @@ import { getCollection } from 'astro:content';
 const posts = (await getCollection('posts')).sort((a,b)=>
   new Date(b?.data?.date || '1970-01-01').getTime() - new Date(a?.data?.date || '1970-01-01').getTime()
 );
+const list = posts.map(p => {
+  const cover = typeof p?.data?.cover === 'string'
+    ? p.data.cover
+    : (typeof p?.data?.image === 'string' ? p.data.image : p?.data?.image?.src);
+  const dateStr = p?.data?.date ? new Date(p.data.date).toLocaleDateString('fr-FR') : '';
+  return {
+    slug: p.id,
+    title: p.data.title,
+    subtitle: p.data.subtitle || '',
+    author: p.data.author || '',
+    cover,
+    dateStr,
+    categories: p.data.categories || [],
+    tags: p.data.tags || []
+  };
+});
 ---
 <html lang="fr">
   <head>
@@ -19,18 +35,23 @@ const posts = (await getCollection('posts')).sort((a,b)=>
     <main class="container">
       <h1>Actualités</h1>
       <div class="grid posts-grid">
-        {posts.map(p => (
-          <a href={`/actu/${p.slug}`} style="border:1px solid #eee;padding:12px">
-            {p.data.cover && <img src={p.data.cover} alt={p.data.title} loading="lazy"/>}
-            <h3 style="margin:10px 0 6px">{p.data.title}</h3>
-            <div style="color:var(--muted);font-size:.9rem">
-              {new Date(p.data.date).toLocaleDateString('fr-FR')}
-            </div>
-            {p.data.excerpt && <p>{p.data.excerpt}</p>}
-          </a>
+        {list.map((p) => (
+          <article class="post-card">
+            <a href={`/actu/${p.slug}`} aria-label={p.title}>
+              {p.cover && <img class="post-cover" src={p.cover} alt={p.title} loading="lazy" />}
+              <h3 class="post-title">{p.title}</h3>
+              {p.subtitle && <div class="post-subtitle">{p.subtitle}</div>}
+              <div class="post-meta">
+                {p.dateStr && <span>{p.dateStr}</span>}
+                {p.author && <span class="sep">•</span>}
+                {p.author && <span>{p.author}</span>}
+              </div>
+            </a>
+          </article>
         ))}
       </div>
     </main>
     <Footer />
+
   </body>
 </html>

@@ -1,6 +1,5 @@
 ---
 title: Comité de Paris de Tennis
-slug: comite-paris-tennis
 status: réalisé
 year: 2024
 city: Paris (75)

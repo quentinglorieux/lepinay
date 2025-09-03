@@ -1,8 +1,10 @@
 // src/content.config.ts
 import { defineCollection, z } from 'astro:content';
-import { file } from 'astro/loaders';
+import { glob } from 'astro/loaders';
 
+// PROJETS: chaque projet est un dossier avec un index.md
 const projects = defineCollection({
+  loader: glob({ pattern: '**/index.md', base: './src/content/projects' }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
@@ -15,13 +17,16 @@ const projects = defineCollection({
     }).passthrough(),
 });
 
-// Collection de posts
+// POSTS: un fichier .md par article dans src/content/posts
 const posts = defineCollection({
-  schema: z.object({
+  loader: glob({ pattern: '**/*.md', base: './src/content/posts' }),
+  schema: ({ image }) => z.object({
     title: z.string(),
-    // date: z.string().optional(),
-    cover: z.string().optional(),
-    excerpt: z.string().optional(),
+    subtitle: z.string().optional(),
+    date: z.coerce.date().optional(),
+    author: z.string().optional(),
+    image: image().optional(),     // si tu veux aussi un champ image
+    categories: z.array(z.string()).optional(),
     tags: z.array(z.string()).optional(),
   }).passthrough(),
 });

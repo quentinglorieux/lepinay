@@ -71,7 +71,7 @@ const iconList = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
         v-for="p in filtered"
         :key="p.id || p.slug"
         class="card"
-        :href="`/projets/${p.slug}`"
+        :href="`/projets/${p.id}`"
         :aria-label="p.data.title"
       >
         <img

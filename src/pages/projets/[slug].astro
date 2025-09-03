@@ -2,12 +2,12 @@
 import '../../styles/global.css';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
   return projects.map((p, idx) => ({
-    params: { slug: p.slug },
+    params: { slug: p.id },
     props: {
       project: p,
       prev: idx > 0 ? projects[idx - 1] : null,
@@ -18,7 +18,7 @@ export async function getStaticPaths() {
 
 const { project, prev, next } = Astro.props;
 const d = project.data;
-const { Content } = await project.render();
+const { Content } = await render(project);
 
 // Auto-import des images si gallery vide
 let gallery = d.gallery;
@@ -31,8 +31,10 @@ if (!gallery || gallery.length === 0) {
   // Debug : affiche toutes les clés
   console.log(Object.keys(allImages));
 
+  const folderKey = (project.id || project.slug || '').replace(/\/.+$/, '').replace(/\/$/, '');
+
   gallery = Object.entries(allImages)
-    .filter(([path]) => path.includes(`projects/${project.slug}/images/`))
+    .filter(([path]) => folderKey && path.includes(`projects/${folderKey}/images/`))
     .map(([_, mod]) => mod);
 }
 
@@ -200,10 +202,10 @@ const cats = (d.categories || []).join(', ');
           aria-label="Navigation projets"
         >
           <div>
-            {prev && <a href={`/projets/${prev.slug}`}>&larr; {prev.data.title}</a>}
+            {prev && <a href={`/projets/${prev.id}`}>&larr; {prev.data.title}</a>}
           </div>
           <div>
-            {next && <a href={`/projets/${next.slug}`}>{next.data.title} &rarr;</a>}
+            {next && <a href={`/projets/${next.id}`}>{next.data.title} &rarr;</a>}
           </div>
         </nav>
       )}

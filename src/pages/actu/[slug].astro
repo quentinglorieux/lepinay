@@ -2,38 +2,120 @@
 import '../../styles/global.css';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts');
   return posts.map((p) => ({
-    params: { slug: p.slug },
-    props: { post: p }
+    params: { slug: p.id },
+    props: { post: p },
   }));
 }
 
 const { post } = Astro.props;
 const d = post.data;
-const { Content } = await post.render();
+const { Content } = await render(post);
+
+// util: retourne une src quelle que soit la forme (image() ou string)
+function toSrc(img: any): string | undefined {
+  if (!img) return undefined;
+  return typeof img === 'string' ? img : img.src;
+}
+
+const coverSrc = toSrc(d.cover) || toSrc(d.image);
+const dateStr = d?.date
+  ? new Date(d.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })
+  : '';
 ---
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{d.title} — Actualités</title>
+    <meta name="description" content={d?.excerpt || d?.subtitle || d?.title} />
+    {coverSrc && <meta property="og:image" content={coverSrc} />}
   </head>
   <body>
     <Header />
     <main class="container">
-      <article>
-        <h1>{d.title}</h1>
-        <div style="color:var(--muted);margin-bottom:10px">
-          {new Date(d.date).toLocaleDateString('fr-FR')}
+      <nav style="margin:16px -20px 10px;font-size:.95rem; ">
+        <a href="/actu">Actualités</a> / <span aria-current="page">{d.title}</span>
+      </nav>
+
+      <article class="post">
+        <header class="post-header">
+          <div class="post-titleblock">
+            <h1 class="post-title">{d.title}</h1>
+            {d.subtitle && <div class="post-subtitle">{d.subtitle}</div>}
+            <div class="post-meta">
+              {dateStr && <time datetime={d?.date?.toISOString ? d.date.toISOString() : ''}>{dateStr}</time>}
+              {d.author && <div>Posté par {d.author}</div>}
+            </div>
+          </div>
+          {coverSrc && (
+            <aside class="post-aside">
+              <img src={coverSrc} alt={d.title} loading="eager" />
+            </aside>
+          )}
+        </header>
+
+        <div class="prose">
+          <Content />
         </div>
-        {d.cover && <img src={d.cover} alt={d.title} />}
-        <Content />
+
+        {(d.tags?.length > 0) && (
+          <footer class="post-tags" aria-label="Tags">
+            {d.tags.map((t: string) => <a href={`/actu?tag=${encodeURIComponent(t)}`} class="tag">#{t}</a>)}
+          </footer>
+        )}
       </article>
     </main>
     <Footer />
+
+    <style>
+      .container { width: 75%; margin: 0 auto; }
+      .post-header { display: flex; gap: 20px; align-items: flex-start;}
+      .post-titleblock { flex: 1; }
+
+      .post-aside img {
+        max-width: 400px;
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        filter: grayscale(100%);
+        display: block;
+      }
+
+      .post { margin: 60px auto 40px; }
+      .post-title { margin: 0 0 6px; font-size: clamp(1.6rem, 2.2vw, 2.2rem); }
+      .post-subtitle { font-style: italic; color: var(--muted); margin: 0 0 14px; }
+      .post-meta {
+        color: var(--muted);
+        font-size: .95rem;
+        display: block;
+        line-height: 1.4;
+      }
+
+      .post-meta time {
+        font-weight: 500;
+        font-size: 1.1rem;
+      }
+
+      .post-tags { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 8px; }
+      .post-tags .tag { font-size: .9rem; color: var(--fg); border: 1px solid var(--accent); padding: 2px 8px; border-radius: 20px; text-decoration: none; }
+      .post-tags .tag:hover { background: var(--overlay); }
+
+      @media (max-width: 1000px) {
+        .container { width: 80%; margin: 0 auto; }
+        .post { margin: 40px 0 40px; }
+        .post-header {
+          flex-direction: column;
+        }
+        .post-aside img {
+          max-width: 100%;
+          margin-bottom: 16px;
+        }
+      }
+    </style>
   </body>
 </html>

@@ -1,7 +1,6 @@
 ---
 title: Réhabilitation de 16 logements 
 subtitle: Réhabilitation lourde et surélévation de 2 bâtiments anciens
-slug: arcueil15-17
 status: Chantier en cours
 year: 2025
 city: Arcueil (94)

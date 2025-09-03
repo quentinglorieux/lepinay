@@ -1,7 +1,6 @@
 ---
 title: Logements sociaux BBC
 subtitle: Réhabilitation et extension du comité de Paris de Tennis.
-slug: logements-juziers
 status: réalisé
 year: 2023
 city: Juziers (78)

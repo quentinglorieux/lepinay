@@ -7,11 +7,83 @@ const nav = [
 ];
 ---
 <header class="site container">
-<a href="/" class="logo">
-  <img src="/logo.svg" alt="Logo de l’agence" width="400" height="auto" />
+<a href="/" class="logo" aria-label="Accueil">
+  <!-- Clair par défaut -->
+  <img src="/logo.svg" alt="Logo" width="400" class="logo-img logo-light" />
+  <!-- Sombre (cachée par défaut) -->
+  <img src="/logo_dark.svg" alt="" width="400" class="logo-img logo-dark" aria-hidden="true" />
 </a>
   <!-- <a href="/" aria-label="Logo – Agence"><strong>AGENCE PIERRE LEPINAY</strong></a> -->
   <nav>
     {nav.map(n => <a href={n.href}>{n.label}</a>)}
+   <button id="theme-toggle" class="theme-toggle" aria-label="Basculer le thème">
+  <!-- Light mode icon (sun) -->
+  <svg class="icon-dark" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+    <circle cx="12" cy="12" r="5"/>
+    <line x1="12" y1="1" x2="12" y2="3"/>
+    <line x1="12" y1="21" x2="12" y2="23"/>
+    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+    <line x1="1" y1="12" x2="3" y2="12"/>
+    <line x1="21" y1="12" x2="23" y2="12"/>
+    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+  </svg>
+
+  <!-- Dark mode icon (moon) -->
+  <svg class="icon-light" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/>
+  </svg>
+</button>
   </nav>
 </header>
+
+<script>
+  const root = document.documentElement;
+  const btn = document.getElementById('theme-toggle');
+
+  // Charger préférences si elles existent
+  if (localStorage.getItem('theme') === 'dark') {
+    root.setAttribute('data-theme', 'dark');
+  }
+
+  btn?.addEventListener('click', () => {
+    const isDark = root.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+      root.removeAttribute('data-theme');
+      localStorage.setItem('theme', 'light');
+    } else {
+      root.setAttribute('data-theme', 'dark');
+      localStorage.setItem('theme', 'dark');
+    }
+  });
+</script>
+<style>
+nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+nav a {
+  display: inline-block;
+}
+.theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.4rem;
+  /* margin-left: 1rem; removed, gap handles spacing */
+  display: flex;
+  align-items: center;
+  color: inherit;
+  line-height: 1;
+  padding: 0;
+}
+.theme-toggle .icon-light,
+.theme-toggle .icon-dark {
+  filter: grayscale(1);
+}
+.theme-toggle .icon-dark { display: none; }
+:root[data-theme="dark"] .theme-toggle .icon-light { display: none; }
+:root[data-theme="dark"] .theme-toggle .icon-dark { display: inline; }
+</style>

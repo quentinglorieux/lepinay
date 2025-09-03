@@ -6,6 +6,15 @@
   --text: #111111;
   --overlay: rgba(240, 238, 238, 0.7);
 }
+:root[data-theme="dark"] {
+  --bg: #262626;
+  --fg: #f2f2f2;
+  --muted: #aaa;
+  --accent: #ddd;
+  --text: #f8f8f8;
+  --overlay: rgba(20, 20, 20, 0.7);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -132,9 +141,9 @@ nav a {
   cursor: pointer;
 }
 .filters .chip.active {
-  background: #111;
+  background: #4B5563;
   color: #fff;
-  border-color: #111;
+  border-color: #fff;
 }
 
 /* Page projet */
@@ -195,4 +204,29 @@ nav a {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+/* Logo theme switching */
+.logo-img{display:inline-block;vertical-align:middle;height:auto}
+.logo-light{display:inline}
+.logo-dark{display:none}
+
+/* Quand l’utilisateur a activé le thème sombre (data-theme="dark") */
+:root[data-theme="dark"] .logo-light{display:none}
+:root[data-theme="dark"] .logo-dark{display:inline}
+
+/* Si l’utilisateur n’a PAS choisi (pas d’attribut data-theme), suivre la préférence système */
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme]) .logo-light{display:none}
+  :root:not([data-theme]) .logo-dark{display:inline}
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #E293B;
+    --fg: #f2f2f2;
+    --muted: #aaa;
+    --accent: #ddd;
+    --text: #f8f8f8;
+    --overlay: rgba(20, 20, 20, 0.7);
+  }
 }

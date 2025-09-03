@@ -46,6 +46,30 @@ header.site {
   justify-content: space-between;
   padding: 18px 0;
   border-bottom: 1px solid #eee;
+  flex-wrap: wrap;
+}
+@media (max-width: 600px) {
+  header.site {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  header.site .logo {
+    width: 90%;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  header.site nav {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-around;
+  }
+  header.site nav a,
+  header.site nav button {
+    margin-left: 0;
+  }
 }
 nav a {
   margin-left: 18px;
@@ -228,5 +252,21 @@ nav a {
     --accent: #ddd;
     --text: #f8f8f8;
     --overlay: rgba(20, 20, 20, 0.7);
+  }
+}
+
+footer {
+  margin-top: 40px;
+  padding: 20px 0;
+  border-top: 1px solid #eee;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 600px) {
+  footer {
+    padding-left: 20px;
+    padding-right: 20px;
   }
 }

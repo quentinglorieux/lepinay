@@ -31,8 +31,18 @@ function imgSrc(cover:any){
 
 const mode = ref<'grid' | 'list'>('grid')
 
-const iconGrid = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M1 2a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2zm0 9a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3zm9-9a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1V2zm0 9a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1v-3z"/></svg>`;
-const iconList = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M2 12.5a.5.5 0 0 1 .5-.5H14a.5.5 0 0 1 0 1H2.5a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5H14a.5.5 0 0 1 0 1H2.5a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5H14a.5.5 0 0 1 0 1H2.5a.5.5 0 0 1-.5-.5z"/></svg>`;
+const iconGrid = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="3" y="3" width="7" height="7"/>
+  <rect x="14" y="3" width="7" height="7"/>
+  <rect x="14" y="14" width="7" height="7"/>
+  <rect x="3" y="14" width="7" height="7"/>
+</svg>`;
+
+const iconList = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <line x1="4" y1="6" x2="20" y2="6"/>
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <line x1="4" y1="18" x2="20" y2="18"/>
+</svg>`;
 </script>
 
 <template>
@@ -97,4 +107,3 @@ const iconList = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
     </ul>
   </div>
 </template>
-

@@ -183,6 +183,7 @@ nav a {
   padding: 6px 10px;
   border-radius: 3px;
   cursor: pointer;
+  font-weight: 300;
 }
 .filters .chip.active {
   background: var(--accent);
@@ -323,12 +324,14 @@ footer {
   background: none;
   padding: 4px 8px;
   cursor: pointer;
-  color: var(--fg); /* ensure SVG icons use currentColor and are visible in dark */
+  color: var(--accent); /* ensure SVG icons use currentColor and are visible in dark */
+  opacity: 0.7;
 }
 .view-toggle .chip svg { display: inline-block; vertical-align: middle; }
 .view-toggle .chip.active {
   color: var(--fg);
-  text-decoration: none;
+  font-weight: 600;
+  opacity: 1;
 }
 
 .projects-list{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:12px }

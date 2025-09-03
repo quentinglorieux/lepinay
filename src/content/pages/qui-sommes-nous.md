@@ -24,7 +24,8 @@ associates:
 
 ## Pierre Lépinay Architecture
 
-Pierre Lépinay Architecture est une **agence parisienne** dirigée par deux associés,  **Pierre Lépinay** et **Garance Champlois**.
+Pierre Lépinay Architecture est une **agence parisienne** dirigée par deux associés, **Pierre Lépinay** et **Garance Champlois**.  
+[En savoir plus sur les **associés**](#associes).
 
 ---
 

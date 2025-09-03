@@ -147,9 +147,14 @@ nav a {
 }
 .card .meta .l1 {
   font-weight: 500;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
 }
-.card .meta .l2,
+.card .meta .l2{
+  font-size: 1.1rem;
+  color: var(--text);
+  font-variant: small-caps;
+}
+
 .card .meta .l3 {
   font-size: 1rem;
   color: var(--text);

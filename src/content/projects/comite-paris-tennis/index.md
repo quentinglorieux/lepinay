@@ -3,7 +3,7 @@ title: Comité de Paris de Tennis
 slug: comite-paris-tennis
 status: réalisé
 year: 2024
-city: Paris
+city: Paris (75)
 country: FR
 surface: 865 m² SDP
 budget: 2 300 000 € HT

@@ -3,7 +3,7 @@ title: Maison des carriers
 slug: maison-des-carriers
 status: réalisé
 year: 2024
-city: Moisson
+city: Moisson (78)
 country: FR
 surface: 359 m2 SHON
 budget: 513 000 € HT

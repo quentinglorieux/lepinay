@@ -24,7 +24,7 @@ body {
   padding: 0;
   background: var(--bg);
   color: var(--fg);
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', serif;
   font-weight: 300;
 }
 a {
@@ -44,7 +44,7 @@ header.site {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 0;
+  padding: 18px 10px;
   border-bottom: 1px solid #eee;
   flex-wrap: wrap;
 }
@@ -203,6 +203,17 @@ nav a {
 }
 .info-grid dd {
   margin: 0;
+}
+
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+@media (max-width: 600px) {
+  .posts-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .gallery {

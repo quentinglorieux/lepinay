@@ -18,7 +18,7 @@ const posts = (await getCollection('posts')).sort((a,b)=>
     <Header />
     <main class="container">
       <h1>Actualités</h1>
-      <div class="grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="grid posts-grid">
         {posts.map(p => (
           <a href={`/actu/${p.slug}`} style="border:1px solid #eee;padding:12px">
             {p.data.cover && <img src={p.data.cover} alt={p.data.title} loading="lazy"/>}

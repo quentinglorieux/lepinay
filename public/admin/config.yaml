@@ -1,0 +1,108 @@
+backend:
+  name: git-gateway        # Sur Netlify: Identity + Git Gateway
+  branch: main             # ta branche par défaut
+
+# IMPORTANT pour Astro image()
+# -> écrire des chemins d’images relatifs au fichier MD (ex: ./cover.png)
+media_folder_relative: true
+
+# Valeurs par défaut (collections pourront surcharger)
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+publish_mode: editorial_workflow   # brouillon -> review -> publish (facultatif)
+
+collections:
+  # -------------------------
+  # PROJETS
+  # -------------------------
+  - name: "projects"
+    label: "Projets"
+    folder: "src/content/projects"
+    create: true
+    format: "frontmatter"
+    extension: "md"
+    # Crée un dossier par projet avec index.md
+    path: "{{slug}}/index"
+    # ECRASE l'emplacement d'upload pour coller aux fichiers
+    media_folder: ""        # => met les images dans le même dossier que index.md
+    public_folder: ""       # => et écrit des chemins relatifs ./image.png
+    fields:
+      - { name: "title", label: "Titre", widget: "string" }
+      - { name: "year", label: "Année", widget: "number", required: false }
+      - { name: "city", label: "Ville", widget: "string", required: false }
+      - { name: "status", label: "Statut", widget: "select", options: ["étude", "chantier", "réalisé"], required: false }
+      - { name: "categories", label: "Catégories", widget: "list", required: false }
+      - { name: "tags", label: "Tags", widget: "list", required: false }
+      - { name: "surface", label: "Surface", widget: "string", required: false }
+      - { name: "budget", label: "Budget", widget: "string", required: false }
+      - { name: "client", label: "Maîtrise d’ouvrage", widget: "string", required: false }
+
+      # Images locales (restent dans le dossier du projet)
+      - { name: "cover", label: "Image de couverture", widget: "image", required: false }
+      - name: "gallery"
+        label: "Galerie"
+        widget: "list"
+        required: false
+        field: { name: "image", label: "Image", widget: "image" }
+
+      # SEO
+      - label: "SEO"
+        name: "seo"
+        widget: "object"
+        collapsed: true
+        fields:
+          - { name: "description", label: "Description", widget: "text", required: false }
+          - { name: "image", label: "Image SEO", widget: "image", required: false }
+
+      # Corps du texte (Markdown)
+      - { name: "body", label: "Texte", widget: "markdown" }
+
+  # -------------------------
+  # ACTU / BLOG
+  # -------------------------
+  - name: "posts"
+    label: "Actualités"
+    folder: "src/content/posts"
+    create: true
+    format: "frontmatter"
+    extension: "md"
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    # Pour les posts, on peut accepter des images dans /uploads (par défaut)
+    fields:
+      - { name: "title", label: "Titre", widget: "string" }
+      - { name: "date", label: "Date", widget: "datetime" }
+      - { name: "cover", label: "Image", widget: "image", required: false }
+      - { name: "excerpt", label: "Résumé", widget: "text", required: false }
+      - { name: "tags", label: "Tags", widget: "list", required: false }
+      - label: "SEO"
+        name: "seo"
+        widget: "object"
+        collapsed: true
+        fields:
+          - { name: "description", label: "Description", widget: "text", required: false }
+          - { name: "image", label: "Image SEO", widget: "image", required: false }
+      - { name: "body", label: "Texte", widget: "markdown" }
+
+  # -------------------------
+  # PAGES STATIQUES
+  # -------------------------
+  - name: "pages"
+    label: "Pages"
+    folder: "src/content/pages"
+    create: true
+    format: "frontmatter"
+    extension: "md"
+    # Pour garder les images à côté du .md (utile pour Astro image())
+    media_folder: ""
+    public_folder: ""
+    fields:
+      - { name: "title", label: "Titre", widget: "string" }
+      - label: "SEO"
+        name: "seo"
+        widget: "object"
+        collapsed: true
+        fields:
+          - { name: "description", label: "Description", widget: "text", required: false }
+          - { name: "image", label: "Image SEO", widget: "image", required: false }
+      - { name: "body", label: "Contenu", widget: "markdown" }

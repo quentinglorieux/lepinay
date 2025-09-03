@@ -1,5 +1,6 @@
 ---
 title: Logements sociaux BBC
+subtitle: Réhabilitation et extension du comité de Paris de Tennis.
 slug: logements-juziers
 status: réalisé
 year: 2023
@@ -9,8 +10,7 @@ surface: 2508 m2
 budget: 4 421 969 €
 photographies : Patrick Tourneboeuf 
 maitrise_ouvrage :  Immobilière 3F
-maitre_oeuvre : 
-architecte : Pierre Lépinay
+maitre_oeuvre : Pierre Lépinay
 bureau_etude : [Facea, Certification Qualitel Habitat Environnement]
 client: Privé
 categories: [Construction]

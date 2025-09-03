@@ -179,9 +179,9 @@ nav a {
   margin: 16px 0;
 }
 .filters .chip {
-  border: 0.7px solid var(--accent);
+  border: 0.0px solid var(--accent);
   padding: 6px 10px;
-  border-radius: 3px;
+  border-radius: 1px;
   cursor: pointer;
   font-weight: 300;
 }
@@ -193,7 +193,7 @@ nav a {
 :root[data-theme="dark"] .filters .chip {
   background: var(--filter-dark-bg);
   color: var(--fg);
-  border: 1px solid var(--filter-dark-border);
+  border: 0.7px solid var(--filter-dark-border);
 }
 :root[data-theme="dark"] .filters .chip:hover {
   background: var(--filter-dark-hover);

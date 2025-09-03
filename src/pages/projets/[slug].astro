@@ -76,6 +76,11 @@ const cats = (d.categories || []).join(', ');
       <div class="project-header">
         <div class="project-title">
           <h1 style="margin:0 0 8px">{d.title}</h1>
+          {d.subtitle && (
+            <div class="subtitle" style="margin:0 0 50px;font-size:1.1rem;color:var(--muted);">
+              {d.subtitle}
+            </div>
+          )}
           <dl class="info-grid" aria-label="Informations clés du projet">
             {d.city && (
               <>
@@ -83,8 +88,8 @@ const cats = (d.categories || []).join(', ');
                 <dd>{d.city}</dd>
               </>
             )}
-            <dt>Année</dt>
-            <dd>{d.year}</dd>
+            <dt>Phase</dt>
+            <dd>{d.status}</dd>
             {d.surface && (
               <>
                 <dt>Surface</dt>
@@ -105,20 +110,36 @@ const cats = (d.categories || []).join(', ');
             )}
             {d['maitre_oeuvre'] && (
               <>
-                <dt>Maître d’œuvre</dt>
+                <dt>Maîtrise d’œuvre</dt>
                 <dd>{d['maitre_oeuvre']}</dd>
-              </>
-            )}
-            {d['architecte'] && (
-              <>
-                <dt>Architecte</dt>
-                <dd>{d['architecte']}</dd>
               </>
             )}
             {d['bureau_etude'] && (
               <>
-                <dt>Bureaux d’étude</dt>
-                <dd>{Array.isArray(d['bureau_etude']) ? d['bureau_etude'].join(', ') : d['bureau_etude']}</dd>
+                <dt>Bureaux d’études</dt>
+                <dd>
+                  {Array.isArray(d['bureau_etude']) ? (
+                    <div>
+                      {d['bureau_etude'].map((item: string) => (
+                        <div>{item}</div>
+                      ))}
+                    </div>
+                  ) : (
+                    d['bureau_etude']
+                  )}
+                </dd>
+              </>
+            )}
+            {d['entreprise'] && (
+              <>
+                <dt>Entreprise générale</dt>
+                <dd>{d['entreprise']}</dd>
+              </>
+            )}
+                        {d['photographies'] && (
+              <>
+                <dt>Photographies</dt>
+                <dd>{d['photographies']}</dd>
               </>
             )}
 

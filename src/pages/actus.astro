@@ -33,10 +33,10 @@ const list = posts.map(p => {
   <body>
     <Header />
     <main class="container">
-      <h1>Actualités</h1>
+      <h1 id="list-title">Actualités</h1>
       <div class="grid posts-grid">
         {list.map((p) => (
-          <article class="post-card">
+          <article class="post-card" data-tags={p.tags.map((t)=>t.toLowerCase()).join(',')}>
             <a href={`/actus/${p.slug}`} aria-label={p.title}>
               {p.cover && <img class="post-cover" src={p.cover} alt={p.title} loading="lazy" />}
               <h3 class="post-title">{p.title}</h3>
@@ -50,6 +50,36 @@ const list = posts.map(p => {
           </article>
         ))}
       </div>
+    <script is:inline>
+      document.addEventListener('DOMContentLoaded', () => {
+        const params = new URLSearchParams(window.location.search);
+        const tag = (params.get('tag') || '').toLowerCase().trim();
+        if (!tag) return;
+
+        const grid = document.querySelector('.posts-grid');
+        const title = document.getElementById('list-title');
+        if (title) {
+          const cap = tag.charAt(0).toUpperCase() + tag.slice(1);
+          title.textContent = 'Actualités — ' + cap;
+        }
+
+        let count = 0;
+        grid?.querySelectorAll('.post-card').forEach((el) => {
+          const tags = (el.getAttribute('data-tags') || '').split(',').map(s => s.trim());
+          const match = tag && tags.includes(tag);
+          el.style.display = match ? '' : 'none';
+          if (match) count++;
+        });
+
+        if (count === 0 && grid) {
+          const empty = document.createElement('p');
+          empty.textContent = 'Aucun article pour ce tag.';
+          empty.style.color = 'var(--muted)';
+          empty.style.marginTop = '8px';
+          grid.appendChild(empty);
+        }
+      });
+    </script>
     </main>
     <Footer />
 

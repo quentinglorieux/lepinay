@@ -31,6 +31,7 @@ Pierre Lépinay Architecture est une **agence parisienne** dirigée par deux ass
 ## Notre travail
 
 Notre travail couvre **tous types de programmes** :  
+
 - habitations,  
 - équipements,  
 - paysage,  
@@ -38,6 +39,7 @@ Notre travail couvre **tous types de programmes** :
 
 Au cœur de notre démarche réside une conviction : **renforcer ou donner une identité au lieu**.  
 Cela se traduit par une exigence forte en matière de :  
+
 - qualité,  
 - fonctionnalité,  
 - durabilité des espaces construits. 

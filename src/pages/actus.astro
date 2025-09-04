@@ -80,8 +80,24 @@ const list = posts.map(p => {
         }
       });
     </script>
+      <div class="all-tags">
+        <h2>Tags</h2>
+        <div class="tags-list">
+          {Array.from(new Set(list.flatMap(p => p.tags))).map(tag => (
+            <a href={`/actus?tag=${encodeURIComponent(tag)}`} class="tag">#{tag}</a>
+          ))}
+        </div>
+      </div>
     </main>
     <Footer />
+
+    <style>
+      .all-tags { margin-top: 2rem; }
+      .all-tags h2 { font-size:1.2rem; margin-bottom:0.5rem; }
+      .tags-list { display:flex; flex-wrap:wrap; gap:8px; }
+      .tag { font-size:.9rem; border:1px solid var(--accent); padding:2px 8px; border-radius:12px; color:var(--fg); text-decoration:none; }
+      .tag:hover { background:var(--overlay); }
+    </style>
 
   </body>
 </html>

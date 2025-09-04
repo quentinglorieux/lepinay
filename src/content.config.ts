@@ -31,9 +31,8 @@ const posts = defineCollection({
   }).passthrough(),
 });
 
-// PAGES: fichiers MD éditoriaux (ex: qui-sommes-nous)
 const pages = defineCollection({
-  loader: glob({ pattern: '**/qui-sommes-nous.md', base: './src/content/pages' }),
+  loader: glob({ pattern: '**/agence.md', base: './src/content/pages' }),
   schema: ({ image }) => z.object({
     title: z.string(),
     subtitle: z.string().optional(),

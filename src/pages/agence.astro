@@ -6,9 +6,9 @@ import { getCollection, render } from 'astro:content';
 
 // Charger la page via la collection `pages` pour bénéficier des images `image()`
 const pages = await getCollection('pages');
-const entry = pages.find((p) => p.id === 'qui-sommes-nous');
+const entry = pages.find((p) => p.id === 'agence');
 if (!entry) {
-  throw new Error('Page `qui-sommes-nous` introuvable dans la collection `pages`.');
+  throw new Error('Page `Agence` introuvable dans la collection `pages`.');
 }
 
 const { Content } = await render(entry);

@@ -37,7 +37,7 @@ const list = posts.map(p => {
       <div class="grid posts-grid">
         {list.map((p) => (
           <article class="post-card">
-            <a href={`/actu/${p.slug}`} aria-label={p.title}>
+            <a href={`/actus/${p.slug}`} aria-label={p.title}>
               {p.cover && <img class="post-cover" src={p.cover} alt={p.title} loading="lazy" />}
               <h3 class="post-title">{p.title}</h3>
               {p.subtitle && <div class="post-subtitle">{p.subtitle}</div>}

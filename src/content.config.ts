@@ -19,7 +19,7 @@ const projects = defineCollection({
 
 // POSTS: un fichier .md par article dans src/content/posts
 const posts = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/posts' }),
+  loader: glob({ pattern: '**/*.md', base: './src/content/actus' }),
   schema: ({ image }) => z.object({
     title: z.string(),
     subtitle: z.string().optional(),

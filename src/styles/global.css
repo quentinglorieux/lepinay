@@ -5,9 +5,12 @@
   --accent: #8a8a8a;
   --text: #111111;
   --overlay: rgba(240, 238, 238, 0.7);
+  --filter-hover: #F3F4F6;
+  --bg2: #F5F5F5;
 }
 :root[data-theme="dark"] {
   --bg: #262626;
+  --bg2: #2f2e2e;
   --fg: #f2f2f2;
   --muted: #aaa;
   --accent: #ddd;

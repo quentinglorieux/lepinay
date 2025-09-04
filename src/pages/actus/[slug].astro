@@ -65,7 +65,7 @@ const dateStr = d?.date
 
         {(d.tags?.length > 0) && (
           <footer class="post-tags" aria-label="Tags">
-            {d.tags.map((t: string) => <a href={`/actu?tag=${encodeURIComponent(t)}`} class="tag">#{t}</a>)}
+            {d.tags.map((t: string) => <a href={`/actus?tag=${encodeURIComponent(t)}`} class="tag">#{t}</a>)}
           </footer>
         )}
       </article>

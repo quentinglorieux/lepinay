@@ -197,13 +197,13 @@ const iconList = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
     grid-template-columns: 1fr 1fr;
     gap: 14px;
   }
-  .projects-list > li:nth-child(even) .row {
+  /* .projects-list > li:nth-child(even) .row {
     flex-direction: row-reverse;
   }
   .projects-list > li:nth-child(even) .meta {
     text-align: right;
     align-items: flex-end;
-  }
+  } */
 }
 
 /* Small screens: single column, image on top */

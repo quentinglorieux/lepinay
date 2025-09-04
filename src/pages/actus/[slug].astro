@@ -47,9 +47,10 @@ const dateStr = d?.date
           <div class="post-titleblock">
             <h1 class="post-title">{d.title}</h1>
             {d.subtitle && <div class="post-subtitle">{d.subtitle}</div>}
+            {d.city && <div class="city"> {d.city}</div>}
             <div class="post-meta">
               {dateStr && <time datetime={d?.date?.toISOString ? d.date.toISOString() : ''}>{dateStr}</time>}
-              {d.author && <div>Posté par {d.author}</div>}
+              
             </div>
             <div class="prose" style="margin-top: 50px;">
               <Content />
@@ -123,6 +124,16 @@ const dateStr = d?.date
         .post-aside img {
           max-width: 100%;
           margin-bottom: 16px;
+        }
+      }
+        .city {
+          margin-bottom: 20px;
+          margin-top: -10px;
+          font-weight: 400;
+          font-size: 1.1rem;
+          color: var(--text);
+          font-variant: small-caps;
+
         }
 
     </style>

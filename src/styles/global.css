@@ -5,8 +5,8 @@
   --accent: #8a8a8a;
   --text: #111111;
   --overlay: rgba(240, 238, 238, 0.7);
-  --filter-hover: #F3F4F6;
-  --bg2: #F5F5F5;
+  --filter-hover: #f3f4f6;
+  --bg2: #E9E9ED;
 }
 :root[data-theme="dark"] {
   --bg: #262626;
@@ -598,10 +598,10 @@ footer {
   background: var(--overlay);
 }
 
-      .prose ul {
-        list-style-type: circle;
-        margin-left: -1.6em;
-      }
-      .prose li {
-        margin-bottom: 0.3em;
-      }
+.prose ul {
+  list-style-type: circle;
+  margin-left: -1.6em;
+}
+.prose li {
+  margin-bottom: 0.3em;
+}

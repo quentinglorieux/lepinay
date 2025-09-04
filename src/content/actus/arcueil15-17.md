@@ -2,7 +2,7 @@
 title: Suivi du chantier Arceuil
 subtitle: Suivi de chantier et sous titre de qualité
 date: 2025-02-14
-author: Pierre Lépinay
+# author: Pierre Lépinay
 tags: [chantier, suivi]
 categories: [chantier]
 image: ./images/im1.jpg

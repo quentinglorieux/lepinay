@@ -5,7 +5,7 @@ city: La Frette-sur-Seine (95)
 date: 2025-01-01
 tags: [prix]
 categories: [chantier]
-image: ./images/lafrettecover.jpg
+image: ./images/lafrette.jpg
 
 ---
 - Maître d’ouvrage : Immobilière 3F

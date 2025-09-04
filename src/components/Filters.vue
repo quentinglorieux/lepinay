@@ -86,7 +86,7 @@ const iconList = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
       </div>
     </div>
 
-    <div v-if="mode === 'grid'" class="grid projects">
+    <TransitionGroup v-if="mode === 'grid'" name="fade" tag="div" class="grid projects" appear>
       <a
         v-for="p in filtered"
         :key="p.id || p.slug"
@@ -111,9 +111,9 @@ const iconList = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
           </div>
         </div>
       </a>
-    </div>
+    </TransitionGroup>
 
-    <ul v-else class="projects-list" aria-label="Liste des projets">
+    <TransitionGroup v-else tag="ul" class="projects-list" aria-label="Liste des projets" name="fade" appear>
       <li v-for="p in filtered" :key="p.id || p.slug">
         <a :href="`/projets/${p.id}`" class="row" :aria-label="p.data.title">
           <img
@@ -126,15 +126,13 @@ const iconList = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
           <div class="meta">
             <div class="l1">{{ p.data.title }}</div>
             <div class="l2">
-              {{
-                (p.data.city ? p.data.city + " — " : "") + (p.data.year ?? "")
-              }}
+              {{ (p.data.city ? p.data.city + " — " : "") + (p.data.year ?? "") }}
             </div>
             <div class="l3">{{ (p.data.categories || []).join(", ") }}</div>
           </div>
         </a>
       </li>
-    </ul>
+    </TransitionGroup>
   </div>
 </template>
 
@@ -216,5 +214,29 @@ const iconList = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
     max-width: none;
     height: 200px;
   }
+}
+
+/* TransitionGroup animations */
+/* Smoother, slower fade transition */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 400ms ease, transform 400ms ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: scale(0.95);
+}
+/* Smooth reflow when items move */
+.fade-move {
+  transition: transform 400ms ease;
+}
+/* Prevent layout jump on leave */
+.fade-leave-active {
+  position: absolute;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-enter-active, .fade-leave-active, .fade-move { transition: none !important; }
 }
 </style>

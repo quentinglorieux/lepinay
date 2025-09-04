@@ -1,11 +1,11 @@
 ---
-title: Démarrage du chantier du 15-17 rue Cauchy
-subtitle: Réhabilitation lourde et surélévation de 2 bâtiments anciens en 16 logements
-city: Arcueil (94)
+title: Livraison du chantier du 32 rue Cauchy
+subtitle: Réhabilitation de 3 logements dans un bâtiment du XVIIème siècle 
+city:  Arcueil (94)
 date: 2025-01-01
-tags: [démarrage,réhabilitation]
+tags: [livraison,réhabilitation]
 categories: [chantier]
-image: ./images/arcueilcover.jpg
+image: ./images/cauchycover.jpg
 ---
 - Maître d’ouvrage : I3F
 - Bureau d’études fluides et thermique : Capet Ingénierie

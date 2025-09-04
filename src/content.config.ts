@@ -24,12 +24,10 @@ const posts = defineCollection({
     title: z.string(),
     subtitle: z.string().optional(),
     date: z.coerce.date().optional(),
-    author: z.string().optional(),
-    cover: image().optional(),
+    city: z.string().optional(),
     image: image().optional(),
     categories: z.array(z.string()).optional(),
     tags: z.array(z.string()).optional(),
-    excerpt: z.string().optional(),
   }).passthrough(),
 });
 

@@ -16,7 +16,7 @@ const list = posts.map(p => {
     slug: p.id,
     title: p.data.title,
     subtitle: p.data.subtitle || '',
-    author: p.data.author || '',
+    city: p.data.city || '',
     cover,
     dateStr,
     categories: p.data.categories || [],
@@ -43,8 +43,8 @@ const list = posts.map(p => {
               {p.subtitle && <div class="post-subtitle">{p.subtitle}</div>}
               <div class="post-meta">
                 {p.dateStr && <span>{p.dateStr}</span>}
-                {p.author && <span class="sep">•</span>}
-                {p.author && <span>{p.author}</span>}
+                {p.city && <span class="sep">•</span>}
+                {p.city && <span style="font-weight: 500;">{p.city}</span>}
               </div>
             </a>
           </article>

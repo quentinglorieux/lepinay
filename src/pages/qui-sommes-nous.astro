@@ -30,7 +30,7 @@ const d = entry.data as any; // d.title, d.subtitle, d.cover (image()), d.associ
       )}
       <Content />
       <section class="team" aria-label="Associés de l’agence" id="associes">
-        <h2 class="team-title">Les associés</h2>
+        <h2 class="team-title">Nous contacter</h2>
         <div class="team-grid">
           {(Array.isArray(d.associates) ? d.associates : (Array.isArray(d.members) ? d.members : [])).map((associate: any) => (
             <article class="member">

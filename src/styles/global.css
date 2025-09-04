@@ -486,7 +486,7 @@ footer {
   object-fit: cover;
   display: block;
   margin-bottom: 10px;
-  filter: grayscale(100%);
+  filter: grayscale(10%);
 }
 .post-title {
   margin: 6px 0 4px;
@@ -597,3 +597,11 @@ footer {
 .member-links .cv:hover {
   background: var(--overlay);
 }
+
+      .prose ul {
+        list-style-type: circle;
+        margin-left: -1.6em;
+      }
+      .prose li {
+        margin-bottom: 0.3em;
+      }

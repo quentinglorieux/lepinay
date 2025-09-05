@@ -1,5 +1,5 @@
 ---
-title: Ecole élémentaire, commerce, restaurant et place du village à Saint-Illiers-la-Ville (78) 
+title: Ecole élémentaire, commerce, restaurant et place du village.
 subtitle: Réhabilitation d'une longère en coeur de village
 status: Livré 2016
 year: 2012-2016

@@ -8,7 +8,6 @@ const projects = defineCollection({
   schema: ({ image }) =>
     z.object({
       title: z.string(),
-      year: z.coerce.number().optional(),
       cover: image().optional(),
       gallery: z.array(image()).optional(),
       city: z.string().optional(),

@@ -16,7 +16,7 @@ categories: [Réhabilitation, Logements]
 tags: [bois, réhabilitation]
 cover: ./cover.jpg
 seo:
-  description: Réhabilitation et extension du comité de Paris de Tennis.
+  description: 
 ---
 
 ## Situation

@@ -42,8 +42,11 @@ const nav = [
   const root = document.documentElement;
   const btn = document.getElementById('theme-toggle');
 
-  // Charger préférences si elles existent
-  if (localStorage.getItem('theme') === 'dark') {
+  // Charger préférences si elles existent (dark par défaut)
+  const storedTheme = localStorage.getItem('theme');
+  if (storedTheme === 'light') {
+    root.removeAttribute('data-theme');
+  } else {
     root.setAttribute('data-theme', 'dark');
   }
 

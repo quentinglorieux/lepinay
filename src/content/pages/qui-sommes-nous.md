@@ -4,7 +4,7 @@ subtitle: Equipe, valeurs, démarche
 
 seo:
   description: "Présentation de l’agence d’architecture Pierre Lépinay Architecture : nos valeurs, notre équipe et notre démarche."
-  image: ./office.png
+  image: ./office.jpg
 ---
 
 

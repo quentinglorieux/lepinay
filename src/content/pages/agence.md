@@ -1,7 +1,7 @@
 ---
 title: "Qui sommes-nous"
 subtitle: "Une agence d’architecture tournée vers l’innovation et l’humain"
-cover: ./images/office.png
+cover: ./images/office.jpg
 associates:
   - name: "Pierre Lépinay"
     role: "Architecte associé"

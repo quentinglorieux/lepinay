@@ -15,7 +15,6 @@ associates:
     role: "Architecte associée"
     bio: ""
     photo: ./images/GC.png
-    email: ""
     cv: ./cv/garance-champlois.pdf
     links:
       linkedin: "https://www.linkedin.com/in/garance-champlois-4022471a4/"

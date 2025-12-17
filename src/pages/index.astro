@@ -16,6 +16,7 @@ const projects = all.sort((a,b)=> Number(b?.data?.year||0) - Number(a?.data?.yea
   <body>
     <Header />
     <main class="container">
+      <aside class="construction-notice" role="note">Site en cours de construction</aside>
       <section id="projets" style="margin:20px 0 30px">
         <Filters client:load items={projects} />
       </section>
@@ -23,3 +24,15 @@ const projects = all.sort((a,b)=> Number(b?.data?.year||0) - Number(a?.data?.yea
     <Footer />
   </body>
 </html>
+
+<style>
+  .construction-notice {
+    margin: 16px 0 10px;
+    padding: 10px 12px;
+    border: 1px solid var(--accent);
+    background: var(--bg2);
+    color: var(--fg);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+</style>

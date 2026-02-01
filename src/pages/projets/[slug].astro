@@ -24,7 +24,7 @@ const { Content } = await render(project);
 let gallery = d.gallery;
 if (!gallery || gallery.length === 0) {
   const allImages = import.meta.glob(
-    '../../content/projects/**/images/*.{png,jpg,jpeg,webp}',
+    '../../data/projects/**/images/*.{png,jpg,jpeg,webp}',
     { eager: true, import: 'default' }
   );
 

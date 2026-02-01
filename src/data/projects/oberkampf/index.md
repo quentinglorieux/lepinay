@@ -14,7 +14,7 @@ bureau_etude : [Lanoy - Bureau d'études généraliste]
 label : Qualitel Habitat Environnement. Référentiel H&E 2008. Profil A BBC Effinergie
 categories: [Construction, Logements]
 tags: [réhabilitation]
-cover: ./cover.jpg
+# cover: ./cover.jpg
 seo:
   description: 
 ---

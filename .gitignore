@@ -23,5 +23,5 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
-# Ignore raw images for monetier project
-src/content/projects/monetier/images/raw/
+# project-specific raw images
+**/raw/

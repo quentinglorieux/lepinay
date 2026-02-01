@@ -12,7 +12,7 @@ maitre_oeuvre : Agence d’Architecture
 architecte : Lépinay et Meurice
 bureau_etude : [BET Cabinet Lanoy]
 client: Privé
-categories: [Réhabilitation, Bâtiment]
+categories: [Réhabilitation, équipements]
 tags: [bois, réhabilitation]
 cover: ./cover.jpg
 seo:

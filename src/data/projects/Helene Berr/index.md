@@ -12,7 +12,7 @@ photographies : Patrick Tourneboeuf
 maitrise_ouvrage : Ville de Paris, DPA, SLA12
 maitre_oeuvre : Pierre Lépinay Architecture - Bertrand Meurice cotraitant
 bureau_etude : [Scoping - Bureau d'études généraliste]
-categories: [Réhabilitation, Médiathèque, équipements]
+categories: [Réhabilitation, Médiathèque, Équipements]
 tags: [réhabilitation]
 cover: ./cover.jpg
 seo:

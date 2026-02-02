@@ -10,8 +10,8 @@ budget: ...
 photographies : Julien Lanoo
 maitrise_ouvrage : SNCF Réseau
 maitre_oeuvre : Pierre Lépinay Architecture - LAK+ Paysage - SNCF Réseau
-categories: [construction, équipements]
-tags: [construction]
+categories: [Construction, Équipements]
+tags: [Construction]
 cover: ./cover.jpg
 seo:
   description: 

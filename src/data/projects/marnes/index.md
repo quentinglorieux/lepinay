@@ -12,8 +12,8 @@ maitrise_ouvrage : Immobilière 3F
 maitre_oeuvre : Pierre Lépinay Architecture - Bertrand Meurice cotraitant
 bureau_etude : [Scoping - Bureau d'études généraliste]
 label : Certification Habitat Environnement, THPE 2005
-categories: [construction, logements]
-tags: [construction, logements]
+categories: [Construction, Logements]
+tags: [Construction, Logements]
 cover: ./cover.jpg
 seo:
   description: 

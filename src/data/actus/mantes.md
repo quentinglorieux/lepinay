@@ -3,7 +3,7 @@ title: Chantier de construction
 subtitle: 60 logements
 city: Mantes-la-Jolie (78)
 date: 2024-01-01
-tags: [démarrage,construction]
+tags: [Démarrage,Construction]
 categories: [chantier]
 image: ./images/mantescover.jpg
 ---

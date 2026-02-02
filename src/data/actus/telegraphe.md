@@ -3,8 +3,8 @@ title: Lauréat de la consultation pour la réhabilitation de 72 logements
 subtitle: Réhabilitation d'un bâtiment HBM de 1910
 city: Paris (75020)
 date: 2025-01-01
-tags: [réhabilitation]
-categories: [consultation]
+tags: [Réhabilitation]
+categories: [Consultation]
 image: ./images/telegraphecover.jpg
 ---
 - Maître d’ouvrage : Immobilière 3F

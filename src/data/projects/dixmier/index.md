@@ -12,7 +12,7 @@ maitre_oeuvre : Agence d’Architecture
 architecte : Pierre Lépinay Architecture
 bureau_etude : [CAPET Ingénierie – Fluides et Thermique, DEMO – Structure]
 client: Privé
-categories: [Bâtiment]
+categories: []
 tags: [bois, réhabilitation]
 cover: ./cover.png
 seo:

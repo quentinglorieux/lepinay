@@ -12,8 +12,8 @@ maitrise_ouvrage : Commune de Saint-Illiers-la-Ville
 maitre_oeuvre : Pierre Lépinay Architecture
 bureau_etude : Cabinet Lanoy
 entreprise générale : SGM, Société Générale de maçonnerie 
-categories: [Réhabilitation, Equipements]
-tags: [pierre, réhabilitation, bâti ancien, équipements]
+categories: [Réhabilitation, Équipements]
+tags: [Pierre, Réhabilitation, Bâti ancien, Équipements]
 cover: ./cover.jpg
 seo:
   description: Réhabilitation d'une longère.

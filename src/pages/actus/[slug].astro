@@ -1,5 +1,6 @@
 ---
 import '../../styles/global.css';
+import SEO from '../../components/SEO.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { getCollection, render } from 'astro:content';
@@ -29,11 +30,7 @@ const dateStr = d?.date
 ---
 <html lang="fr">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{d.title} — Actualités</title>
-    <meta name="description" content={d?.excerpt || d?.subtitle || d?.title} />
-    {coverSrc && <meta property="og:image" content={coverSrc} />}
+    <SEO title={d.title} description={d?.excerpt || d?.subtitle} image={coverSrc} type="article" />
   </head>
   <body>
     <Header />

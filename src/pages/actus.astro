@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import SEO from '../components/SEO.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { getCollection } from 'astro:content';
@@ -26,9 +27,7 @@ const list = posts.map(p => {
 ---
 <html lang="fr">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Actualités</title>
+    <SEO title="Actualités" description="Actualités de l'agence Lépinay Champlois Architecture : chantiers, livraisons, publications et événements." />
   </head>
   <body>
     <Header />

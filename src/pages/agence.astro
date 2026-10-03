@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import SEO from '../components/SEO.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { getCollection, render } from 'astro:content';
@@ -17,10 +18,7 @@ const d = entry.data as any; // d.title, d.subtitle, d.cover (image()), d.associ
 
 <html lang="fr">
   <head>
-    <meta charset="utf-8" />
-    <title>{d.title}</title>
-    <meta name="description" content={d?.seo?.description || ''} />
-    {d.cover && <meta property="og:image" content={d.cover.src} />}
+    <SEO title={d.title} description={d?.seo?.description} image={d.cover?.src} />
   </head>
   <body>
     <Header />

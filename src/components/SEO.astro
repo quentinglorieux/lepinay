@@ -1,0 +1,68 @@
+---
+// Balises <head> communes : titre, description, favicon, Open Graph, données structurées.
+const SITE_NAME = 'Lépinay Champlois Architecture';
+const DEFAULT_DESCRIPTION =
+  "Lépinay Champlois Architecture, agence d'architecture parisienne dirigée par Pierre Lépinay et Garance Champlois, installée dans le Marais. Projets en Île-de-France.";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: 'website' | 'article';
+}
+
+const { title, description, image, type = 'website' } = Astro.props;
+const fullTitle = title ? `${title} | ${SITE_NAME}` : `${SITE_NAME} | Agence d'architecture à Paris`;
+const desc = description || DEFAULT_DESCRIPTION;
+const site = Astro.site ?? new URL('https://pierre-lepinay-architecture.com');
+const canonical = new URL(Astro.url.pathname, site).href;
+const ogImage = new URL(image || '/og-image.jpg', site).href;
+const isHome = Astro.url.pathname === '/';
+---
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{fullTitle}</title>
+<meta name="description" content={desc} />
+<link rel="canonical" href={canonical} />
+
+<link rel="icon" href="/favicon.ico" sizes="48x48" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<meta name="theme-color" content="#ffffff" />
+
+<meta property="og:site_name" content={SITE_NAME} />
+<meta property="og:locale" content="fr_FR" />
+<meta property="og:type" content={type} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={desc} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogImage} />
+<meta name="twitter:card" content="summary_large_image" />
+
+{isHome && (
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'ProfessionalService',
+      name: SITE_NAME,
+      url: site.href,
+      logo: new URL('/icon-512.png', site).href,
+      image: new URL('/og-image.jpg', site).href,
+      description: DEFAULT_DESCRIPTION,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Rue de Saintonge',
+        addressLocality: 'Paris',
+        addressRegion: 'Île-de-France',
+        addressCountry: 'FR',
+      },
+      areaServed: 'Île-de-France',
+      founder: [
+        { '@type': 'Person', name: 'Pierre Lépinay' },
+        { '@type': 'Person', name: 'Garance Champlois' },
+      ],
+    })}
+  />
+)}

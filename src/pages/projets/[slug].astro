@@ -1,5 +1,6 @@
 ---
 import '../../styles/global.css';
+import SEO from '../../components/SEO.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { getCollection, render } from 'astro:content';
@@ -44,16 +45,12 @@ const cats = (d.categories || []).join(', ');
 ---
 <html lang="fr">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{d.title} — Projets</title>
-    <meta
-      name="description"
-      content={d?.seo?.description || `${d.title} — ${subtitle}`}
+    <SEO
+      title={d.title}
+      description={d?.seo?.description || `${d.title}, projet de Lépinay Champlois Architecture${d.city ? ` à ${d.city}` : ''}${d.year ? ` (${d.year})` : ''}.`}
+      image={d.cover?.src}
+      type="article"
     />
-    <meta property="og:title" content={`${d.title} — Projets`} />
-    <meta property="og:description" content={d?.seo?.description || ''} />
-    {d.cover && <meta property="og:image" content={d.cover.src} />}
     <script
       type="application/ld+json"
       set:html={JSON.stringify({
@@ -64,6 +61,7 @@ const cats = (d.categories || []).join(', ');
         dateCreated: d.year ? String(d.year) : undefined,
         image: d.cover?.src || undefined,
         about: cats || undefined,
+        creator: { '@type': 'Organization', name: 'Lépinay Champlois Architecture' },
       })}
     />
   </head>

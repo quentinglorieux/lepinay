@@ -6,12 +6,14 @@ const nav = [
   { href: '/actus', label: 'ACTUALITÉS' },
 ];
 ---
-<header class="site container">
-<a href="/" class="logo" aria-label="Accueil">
-  <!-- Clair par défaut -->
-  <img src="/logo.svg" alt="Logo" width="400" class="logo-img logo-light" />
-  <!-- Sombre (cachée par défaut) -->
-  <img src="/logo_dark.svg" alt="" width="400" class="logo-img logo-dark" aria-hidden="true" />
+<header class="site container" data-logo="reference">
+<a href="/" class="logo" aria-label="Lépinay Champlois Architecture, accueil">
+  <img src="/logo-lca.svg" alt="" width="120" height="120" class="logo-img logo-light" aria-hidden="true" />
+  <img src="/logo-lca.svg" alt="" width="120" height="120" class="logo-img logo-dark" aria-hidden="true" />
+  <span class="logo-wordmark" aria-hidden="true">
+    <span class="logo-name">Lépinay Champlois</span>
+    <span class="logo-description">Architecture</span>
+  </span>
 </a>
   <!-- <a href="/" aria-label="Logo – Agence"><strong>AGENCE PIERRE LEPINAY</strong></a> -->
   <nav>
@@ -39,6 +41,10 @@ const nav = [
 </header>
 
 <script>
+  const header = document.querySelector('header.site');
+  if (new URLSearchParams(window.location.search).get('logo') === 'compact') {
+    header?.setAttribute('data-logo', 'compact');
+  }
   const root = document.documentElement;
   const btn = document.getElementById('theme-toggle');
 

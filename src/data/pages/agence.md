@@ -21,9 +21,9 @@ associates:
 ---
 
 
-# Pierre Lépinay Architecture
+# Lépinay Champlois Architecture
 
-Pierre Lépinay Architecture est une **agence parisienne** dirigée par deux associés,  **Pierre Lépinay** et **Garance Champlois**. Nos locaux sont situés dans le Marais, rue de Saintonge, à Paris, et nous travaillons essentiellement en Ile-de-France.
+Lépinay Champlois Architecture est une **agence parisienne** dirigée par deux associés,  **Pierre Lépinay** et **Garance Champlois**. Nos locaux sont situés dans le Marais, rue de Saintonge, à Paris, et nous travaillons essentiellement en Ile-de-France.
 
 --- 
 
@@ -59,4 +59,4 @@ Après des études littéraires en classes préparatoires, Garance Champlois int
 
 Elle est diplômée l’année suivante en architecture, en présentant un projet de fin d’études croisant la question des territoires en déclin et le vieillissement de la population, et par une proposition de stratégie urbaine et un travail de réhabilitation de bâtiments vacants à Dieppe - prix de l'Académie d'architecture et de la Maison d'architecture d'Ile de France.
 
-Elle entre chez Pierre Lépinay Architecture en 2021, et s'associe en 2023 : elle y poursuit son travail sur la réhabilitation, l'intégration de l'architecture dans des environnements denses, en particulier les centres historiques sauvegardés, tout en cherchant à appuyer le  choix des matériaux et des principes constructifs vers des solutions écologiques.
+Elle entre chez Lépinay Champlois Architecture en 2021, et s'associe en 2023 : elle y poursuit son travail sur la réhabilitation, l'intégration de l'architecture dans des environnements denses, en particulier les centres historiques sauvegardés, tout en cherchant à appuyer le  choix des matériaux et des principes constructifs vers des solutions écologiques.

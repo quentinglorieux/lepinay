@@ -89,7 +89,7 @@ header.site[data-logo="reference"] .logo {
   width: auto;
 }
 header.site[data-logo="reference"] .logo-img {
-  width: clamp(64px, 12vw, 120px);
+  width: clamp(240px, 30vw, 340px);
 }
 header.site[data-logo="reference"] .logo-wordmark {
   justify-content: center;
@@ -349,7 +349,6 @@ nav a {
 }
 .logo-dark {
   display: none;
-  filter: brightness(0) invert(1);
 }
 
 /* Quand l’utilisateur a activé le thème sombre (data-theme="dark") */

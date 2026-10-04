@@ -8,14 +8,12 @@ associates:
     bio: ""
     photo: ./images/PL.png
     email: "pierrelepinay.architecte@gmail.com"
-    cv: ./cv/pierre-lepinay.pdf
     links:
       linkedin: "https://www.linkedin.com/in/pierre-lépinay-949712277/"
   - name: "Garance Champlois"
     role: "Architecte associée"
     bio: ""
     photo: ./images/GC.png
-    cv: ./cv/garance-champlois.pdf
     links:
       linkedin: "https://www.linkedin.com/in/garance-champlois-4022471a4/"
 ---

@@ -1,0 +1,160 @@
+# Admin du site (Sveltia CMS, compatible Decap). Chaque enregistrement crée
+# un commit sur main, puis Netlify reconstruit le site (1 à 2 minutes).
+backend:
+  name: github
+  repo: quentinglorieux/lepinay
+  branch: main
+  base_url: https://api.netlify.com
+  auth_endpoint: auth
+  commit_messages:
+    create: "Admin : création {{collection}} « {{slug}} »"
+    update: "Admin : modification {{collection}} « {{slug}} »"
+    delete: "Admin : suppression {{collection}} « {{slug}} »"
+    uploadMedia: "Admin : ajout image {{path}}"
+    deleteMedia: "Admin : suppression image {{path}}"
+
+site_url: https://pierre-lepinay-architecture.com
+display_url: https://pierre-lepinay-architecture.com
+logo_url: /icon-192.png
+
+# Valeur globale (chaque collection range ses images à côté de ses fichiers)
+media_folder: public/uploads
+public_folder: /uploads
+
+collections:
+  # ---------------------------------------------------------------- PROJETS
+  - name: projets
+    label: Projets
+    label_singular: Projet
+    description: "Chaque projet a son dossier. Les images ajoutées vont dans son sous-dossier images/."
+    folder: src/data/projects
+    path: "{{slug}}/index"
+    create: true
+    delete: true
+    format: frontmatter
+    extension: md
+    identifier_field: title
+    summary: "{{title}} ({{year}}, {{city}})"
+    sortable_fields: [year, title, city]
+    media_folder: images
+    public_folder: ./images
+    fields:
+      - { name: title, label: Titre, widget: string }
+      - { name: subtitle, label: Sous-titre, widget: string, required: false }
+      - name: categories
+        label: Catégories
+        hint: "Servent aux filtres de la page d'accueil."
+        widget: select
+        multiple: true
+        required: false
+        options: [Construction, Réhabilitation, Logements, Équipements, Médiathèque, Musée]
+      - name: tags
+        label: Mots-clés
+        widget: list
+        required: false
+      - { name: status, label: Phase, widget: string, hint: "Ex. : Livré, Chantier en cours, Études", required: false }
+      - { name: year, label: Année, widget: number, value_type: int, required: false }
+      - { name: city, label: Ville, widget: string, hint: "Ex. : Paris (75012)", required: false }
+      - { name: country, label: Pays, widget: hidden, default: FR }
+      - { name: surface, label: Surface, widget: string, hint: "Ex. : 865 m² SDP", required: false }
+      - { name: budget, label: Budget, widget: string, hint: "Ex. : 2 300 000 € HT", required: false }
+      - { name: maitrise_ouvrage, label: "Maîtrise d'ouvrage", widget: string, required: false }
+      - { name: maitre_oeuvre, label: "Maîtrise d'œuvre", widget: string, required: false }
+      - { name: architecte, label: Architecte, widget: string, required: false }
+      - name: bureau_etude
+        label: "Bureaux d'études"
+        widget: list
+        required: false
+      - { name: entreprise, label: Entreprise, widget: string, required: false }
+      - { name: client, label: Client, widget: string, required: false }
+      - { name: label, label: "Label / certification", widget: string, required: false }
+      - { name: photographies, label: "Crédit photo", widget: string, required: false }
+      - { name: cover, label: "Image de couverture", widget: image, hint: "Image affichée sur la page d'accueil.", required: false }
+      - name: gallery
+        label: Galerie
+        hint: "Laisser vide pour afficher automatiquement toutes les images du dossier images/ du projet."
+        widget: list
+        required: false
+        field: { name: image, label: Image, widget: image }
+      - name: seo
+        label: Référencement
+        widget: object
+        collapsed: true
+        required: false
+        fields:
+          - { name: description, label: "Description pour Google (150 caractères env.)", widget: text, required: false }
+      - { name: body, label: Texte, widget: markdown, required: false }
+
+  # ----------------------------------------------------------- ACTUALITÉS
+  - name: actus
+    label: Actualités
+    label_singular: Actualité
+    folder: src/data/actus
+    create: true
+    delete: true
+    format: frontmatter
+    extension: md
+    identifier_field: title
+    slug: "{{slug}}"
+    summary: "{{title}} ({{date | date('DD/MM/YYYY')}})"
+    sortable_fields: [date, title]
+    media_folder: images
+    public_folder: ./images
+    fields:
+      - { name: title, label: Titre, widget: string }
+      - { name: subtitle, label: Sous-titre, widget: string, required: false }
+      - { name: date, label: Date, widget: datetime, time_format: false, date_format: DD/MM/YYYY, format: YYYY-MM-DD }
+      - { name: city, label: Ville, widget: string, required: false }
+      - { name: categories, label: Catégories, widget: list, hint: "Ex. : chantier, prix, consultation", required: false }
+      - { name: tags, label: Mots-clés, widget: list, required: false }
+      - { name: image, label: Image, widget: image, required: false }
+      - { name: body, label: Texte, widget: markdown, required: false }
+
+  # ---------------------------------------------------------------- PAGES
+  - name: pages
+    label: Pages
+    files:
+      - name: agence
+        label: Agence
+        file: src/data/pages/agence.md
+        media_folder: images
+        public_folder: ./images
+        fields:
+          - { name: title, label: Titre de la page, widget: string }
+          - { name: subtitle, label: Sous-titre, widget: string, required: false }
+          - { name: cover, label: Image principale, widget: image, required: false }
+          - name: associates
+            label: Associés
+            widget: list
+            summary: "{{fields.name}}"
+            fields:
+              - { name: name, label: Nom, widget: string }
+              - { name: role, label: Rôle, widget: string, required: false }
+              - { name: bio, label: Bio courte, widget: text, required: false }
+              - { name: photo, label: Photo, widget: image, required: false }
+              - { name: email, label: Email, widget: string, required: false }
+              - name: cv
+                label: CV (PDF)
+                widget: file
+                required: false
+                media_folder: /public/cv
+                public_folder: /cv
+              - name: links
+                label: Liens
+                widget: object
+                required: false
+                fields:
+                  - { name: linkedin, label: LinkedIn, widget: string, required: false }
+          - { name: body, label: Texte, widget: markdown }
+      - name: mentions-legales
+        label: Mentions légales
+        file: src/data/pages/mentions-legales.md
+        fields:
+          - { name: title, label: Titre, widget: string }
+          - name: seo
+            label: Référencement
+            widget: object
+            collapsed: true
+            fields:
+              - { name: description, label: Description, widget: text, required: false }
+          - { name: body, label: Texte, widget: markdown }

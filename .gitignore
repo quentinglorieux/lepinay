@@ -25,3 +25,9 @@ pnpm-debug.log*
 
 # project-specific raw images
 **/raw/
+
+# Local Netlify folder
+.netlify
+
+# Artefacts des tests navigateur
+.playwright-mcp/

@@ -15,7 +15,7 @@ describe('mots de passe', () => {
   it('refuse le mauvais', () => expect(verifyPassword('abd', hashPassword('abc'))).toBe(false));
   it('refuse un hash malformé', () => {
     expect(verifyPassword('abc', 'n-importe-quoi')).toBe(false);
-    expect(verifyPassword('abc', 'scrypt$$')).toBe(false);
+    expect(verifyPassword('abc', 'scrypt::')).toBe(false);
   });
   it('sel aléatoire', () => expect(hashPassword('abc')).not.toBe(hashPassword('abc')));
 });

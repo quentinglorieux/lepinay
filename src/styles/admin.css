@@ -1,0 +1,91 @@
+/* Styles de l'admin uniquement. Indépendant de global.css (site public). */
+:root {
+  --a-bg: #f6f5f3;
+  --a-panel: #ffffff;
+  --a-fg: #1b1a19;
+  --a-muted: #6f675f;
+  --a-taupe: #766c61;
+  --a-border: #e2ded9;
+  --a-accent: #1b1a19;
+  --a-accent-fg: #ffffff;
+  --a-danger: #b42318;
+  --a-ok: #157347;
+  --a-warn: #9a6700;
+  --a-radius: 8px;
+  --a-shadow: 0 1px 2px rgb(0 0 0 / 5%), 0 4px 16px rgb(0 0 0 / 4%);
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body.admin {
+  background: var(--a-bg);
+  color: var(--a-fg);
+  font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+}
+.admin a { color: inherit; }
+.admin h1, .admin h2 { font-family: Didot, "Bodoni 72", "Times New Roman", serif; font-weight: 400; letter-spacing: -0.01em; }
+.admin h1 { font-size: 2rem; margin: 0 0 0.25em; }
+.admin h2 { font-size: 1.35rem; margin: 1.5em 0 0.5em; }
+
+.a-top {
+  display: flex; align-items: center; gap: 16px;
+  padding: 10px 24px; background: var(--a-panel); border-bottom: 1px solid var(--a-border);
+  position: sticky; top: 0; z-index: 20;
+}
+.a-top img { height: 40px; width: auto; display: block; }
+.a-top nav { display: flex; gap: 18px; margin-left: 12px; }
+.a-top nav a { text-decoration: none; color: var(--a-muted); }
+.a-top nav a[aria-current="page"], .a-top nav a:hover { color: var(--a-fg); }
+.a-top .a-user { margin-left: auto; display: flex; align-items: center; gap: 14px; color: var(--a-muted); font-size: 14px; }
+.a-main { max-width: 1180px; margin: 0 auto; padding: 28px 24px 80px; }
+.a-main.wide { max-width: none; padding: 0; }
+
+.a-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  border: 1px solid var(--a-border); background: var(--a-panel); color: var(--a-fg);
+  border-radius: var(--a-radius); padding: 8px 14px; font: inherit; font-size: 14px;
+  cursor: pointer; text-decoration: none; white-space: nowrap;
+}
+.a-btn:hover { border-color: #c9c3bc; }
+.a-btn:disabled { opacity: 0.55; cursor: default; }
+.a-btn.primary { background: var(--a-accent); color: var(--a-accent-fg); border-color: var(--a-accent); }
+.a-btn.danger { color: var(--a-danger); }
+.a-btn.ghost { border-color: transparent; background: transparent; }
+.a-btn.small { padding: 4px 10px; font-size: 13px; }
+
+.a-card { background: var(--a-panel); border: 1px solid var(--a-border); border-radius: 12px; box-shadow: var(--a-shadow); }
+
+.a-field { display: flex; flex-direction: column; gap: 5px; margin-bottom: 14px; }
+.a-field > label, .a-label { font-size: 13px; font-weight: 600; color: var(--a-fg); }
+.a-field .hint { font-size: 12px; color: var(--a-muted); }
+.a-field .error { font-size: 12px; color: var(--a-danger); }
+.a-input, .a-textarea, .a-select {
+  width: 100%; font: inherit; color: inherit; background: #fff;
+  border: 1px solid var(--a-border); border-radius: var(--a-radius); padding: 8px 10px;
+}
+.a-textarea { min-height: 90px; resize: vertical; }
+.a-input:focus, .a-textarea:focus, .a-select:focus { outline: 2px solid #1b1a1933; border-color: #8d857d; }
+.a-input.invalid, .a-textarea.invalid { border-color: var(--a-danger); }
+.a-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 14px; }
+@media (max-width: 640px) { .a-grid2 { grid-template-columns: 1fr; } }
+
+.a-badge { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; padding: 2px 8px; border-radius: 99px; background: #f1e8d6; color: var(--a-warn); }
+.a-badge.ok { background: #e3f1e8; color: var(--a-ok); }
+.a-badge.err { background: #fbe4e2; color: var(--a-danger); }
+
+.a-notice { padding: 10px 14px; border-radius: var(--a-radius); font-size: 14px; }
+.a-notice.err { background: #fbe4e2; color: var(--a-danger); }
+.a-notice.ok { background: #e3f1e8; color: var(--a-ok); }
+.a-notice.warn { background: #fdf3dc; color: var(--a-warn); }
+
+.a-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.a-chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border: 1px solid var(--a-border); border-radius: 99px; font-size: 13px; background: #fff; cursor: pointer; user-select: none; }
+.a-chip input { margin: 0; }
+.a-chip.on { background: var(--a-accent); color: var(--a-accent-fg); border-color: var(--a-accent); }
+
+@media (max-width: 720px) {
+  .a-top { padding: 8px 14px; flex-wrap: wrap; }
+  .a-top nav { order: 3; width: 100%; margin: 4px 0 0; }
+  .a-main { padding: 18px 14px 80px; }
+}

@@ -47,6 +47,6 @@ if (password.length < 10) {
   process.exit(1);
 }
 const salt = randomBytes(16);
-const hash = `scrypt$${salt.toString('base64')}$${scryptSync(password, salt, 64).toString('base64')}`;
+const hash = `scrypt:${salt.toString('base64')}:${scryptSync(password, salt, 64).toString('base64')}`;
 console.log('\nÀ ajouter dans le tableau JSON de ADMIN_USERS :\n');
 console.log(JSON.stringify({ email, name, hash }));

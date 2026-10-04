@@ -1,0 +1,54 @@
+---
+// Coque des pages de l'admin. N'utilise pas les styles du site public.
+import '../styles/admin.css';
+
+interface Props {
+  title: string;
+  section?: 'accueil' | 'projets' | 'actus' | 'agence';
+  wide?: boolean;
+}
+const { title, section, wide = false } = Astro.props;
+const user = Astro.locals.user;
+const links = [
+  { href: '/admin/projets', label: 'Projets', key: 'projets' },
+  { href: '/admin/actus', label: 'Actualités', key: 'actus' },
+  { href: '/admin/agence', label: 'Agence', key: 'agence' },
+];
+---
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>{title} | Admin Lépinay Champlois</title>
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+  </head>
+  <body class="admin">
+    {user && (
+      <header class="a-top">
+        <a href="/admin" aria-label="Tableau de bord"><img src="/logo-light.png" alt="Lépinay Champlois Architecture" width="103" height="40" /></a>
+        <nav aria-label="Sections">
+          {links.map((l) => (
+            <a href={l.href} aria-current={section === l.key ? 'page' : undefined}>{l.label}</a>
+          ))}
+        </nav>
+        <div class="a-user">
+          <a href="/" target="_blank" rel="noopener">Voir le site</a>
+          <span>{user.name}</span>
+          <button class="a-btn small" id="a-logout" type="button">Déconnexion</button>
+        </div>
+      </header>
+    )}
+    <main class:list={['a-main', { wide }]}>
+      <slot />
+    </main>
+    <script>
+      document.getElementById('a-logout')?.addEventListener('click', async () => {
+        await fetch('/api/admin/logout', { method: 'POST', headers: { origin: location.origin } });
+        location.href = '/admin/login';
+      });
+    </script>
+  </body>
+</html>

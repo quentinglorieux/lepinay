@@ -1,0 +1,13 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import LoginForm from '../../components/admin/LoginForm.vue';
+import { safeNext } from '../../lib/admin/api';
+
+export const prerender = false;
+
+if (Astro.locals.user) return Astro.redirect(safeNext(Astro.url.searchParams.get('next')));
+const next = safeNext(Astro.url.searchParams.get('next'));
+---
+<AdminLayout title="Connexion">
+  <LoginForm client:load next={next} />
+</AdminLayout>

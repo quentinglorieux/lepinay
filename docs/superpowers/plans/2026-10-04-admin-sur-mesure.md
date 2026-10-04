@@ -253,7 +253,7 @@ describe('validate', () => {
 **Interfaces:**
 - Produces:
   - `type User = { email: string; name: string }`
-  - `hashPassword(pw: string): string` au format `scrypt$<saltB64>$<hashB64>`
+  - `hashPassword(pw: string): string` au format `scrypt:<saltB64>:<hashB64>`
   - `verifyPassword(pw: string, stored: string): boolean` (timingSafeEqual)
   - `findUser(email: string, users?: Array<User & { hash: string }>): (User & { hash: string }) | undefined` (comparaison d'email insensible à la casse)
   - `createSession(user: User, secret: string, now = Date.now()): string` (`base64url(json).base64url(hmac)`, exp 7 j)

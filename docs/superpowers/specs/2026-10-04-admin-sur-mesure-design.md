@@ -50,7 +50,7 @@ Astro 5.17 reste en `output: 'static'`, avec l'adaptateur `@astrojs/netlify`. Le
 
 ### Variables d'environnement (Netlify, jamais dans le repo)
 
-- `ADMIN_USERS` : JSON `[{"email":"prenom@exemple.fr","name":"Prénom Nom","hash":"scrypt$<sel>$<hash>"}]`. Un script local `scripts/admin-hash-password.mjs` produit le hash.
+- `ADMIN_USERS` : JSON `[{"email":"prenom@exemple.fr","name":"Prénom Nom","hash":"scrypt:<sel>:<hash>"}]`. Un script local `scripts/admin-hash-password.mjs` produit le hash.
 - `ADMIN_SESSION_SECRET` : 32 octets aléatoires.
 - `GITHUB_TOKEN` : token fine-grained limité au repo `quentinglorieux/lepinay`, permission *Contents: read & write*.
 - `GITHUB_REPO=quentinglorieux/lepinay` ; `GITHUB_BRANCH` : `main` en production, `admin-content-test` sur le branch deploy de test (pour ne pas publier sur le site réel pendant les essais).

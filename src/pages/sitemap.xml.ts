@@ -1,10 +1,10 @@
 import type { APIRoute } from 'astro';
-import { getCollection } from 'astro:content';
+import { getPublished } from '../lib/published';
 
 export const GET: APIRoute = async ({ site }) => {
   const base = site ?? new URL('https://pierre-lepinay-architecture.com');
-  const projects = await getCollection('projects');
-  const posts = await getCollection('posts');
+  const projects = await getPublished('projects');
+  const posts = await getPublished('posts');
   const paths = [
     '/',
     '/agence',

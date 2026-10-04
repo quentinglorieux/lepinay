@@ -1,8 +1,5 @@
 ---
-import '../styles/global.css';
-import SEO from '../components/SEO.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import AgenceView from '../components/views/AgenceView.astro';
 import { getCollection, render } from 'astro:content';
 
 // Charger la page via la collection `pages` pour bénéficier des images `image()`
@@ -13,52 +10,5 @@ if (!entry) {
 }
 
 const { Content } = await render(entry);
-const d = entry.data as any; // d.title, d.subtitle, d.cover (image()), d.associates: [{ photo: image() }]
 ---
-
-<html lang="fr">
-  <head>
-    <SEO title={d.title} description={d?.seo?.description} image={d.cover?.src} />
-  </head>
-  <body>
-    <Header />
-    <main class="container prose about">
-     {d.cover && (
-        <img src={d.cover.src} alt={d.title} style="width:100%;height:auto;display:block;margin-bottom:2rem;" />
-      )}
-      <Content />
-      <section class="team" aria-label="Associés de l’agence" id="associes">
-        <h2 class="team-title">Nous contacter</h2>
-        <div class="team-grid">
-          {(Array.isArray(d.associates) ? d.associates : (Array.isArray(d.members) ? d.members : [])).map((associate: any) => (
-            <article class="member">
-              <div class="photo-wrap">
-                {associate?.photo && <img src={associate.photo.src} alt={`Portrait de ${associate?.name || ''}`} loading="lazy" />}
-              </div>
-              <div class="member-body">
-                <h3 class="member-name">{associate.name}</h3>
-                {associate?.role && <p class="member-role">{associate.role}</p>}
-                {associate?.bio && <p class="member-bio">{associate.bio}</p>}
-                <p class="member-links" aria-label="Réseaux & documents">
-                  {associate?.links?.linkedin || associate?.linkedin ? (
-                    <a href={associate?.links?.linkedin || associate?.linkedin} target="_blank" rel="noreferrer noopener" class="link">LinkedIn</a>
-                  ) : null}
-                   </p>
-                   <p class="member-links" aria-label="Réseaux & documents">
-                  {associate?.email ? (
-                    <a href={`mailto:${associate.email}`} class="link">Email</a>
-                  ) : null}</p>
-                  <p class="member-links cv">
-                  {associate?.cv ? (
-                    <a href={associate.cv} class="cv" download>Télécharger le CV</a>
-                  ) : null}
-                </p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-    </main>
-    <Footer />
-  </body>
-</html>
+<AgenceView data={entry.data}><Content /></AgenceView>

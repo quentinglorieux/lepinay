@@ -1,0 +1,184 @@
+---
+// Rendu d'une page projet. Utilisé par /projets/[slug] et par l'aperçu de l'admin.
+// data : frontmatter du projet (cover au format { src }), gallery : [{ src, width, height }],
+// prev/next : { id, data: { title } } ou null. Le corps du texte est passé en slot.
+import '../../styles/global.css';
+import SEO from '../SEO.astro';
+import Header from '../Header.astro';
+import Footer from '../Footer.astro';
+
+const { data: d, gallery = [], prev = null, next = null } = Astro.props;
+
+// Helpers
+const subtitle = `${d.city ? d.city + ' — ' : ''}${d.year}`;
+const cats = (d.categories || []).join(', ');
+---
+<html lang="fr">
+  <head>
+    <SEO
+      title={d.title}
+      description={d?.seo?.description || `${d.title}, projet de Lépinay Champlois Architecture${d.city ? ` à ${d.city}` : ''}${d.year ? ` (${d.year})` : ''}.`}
+      image={d.cover?.src}
+      type="article"
+    />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'CreativeWork',
+        name: d.title,
+        locationCreated: d.city || undefined,
+        dateCreated: d.year ? String(d.year) : undefined,
+        image: d.cover?.src || undefined,
+        about: cats || undefined,
+        creator: { '@type': 'Organization', name: 'Lépinay Champlois Architecture' },
+      })}
+    />
+  </head>
+  <body>
+    <Header />
+    <main class="container">
+      <nav style="margin:20px -20px 6px;font-size:.95rem">
+        <a href="/#projets">Projets</a> /
+        <span aria-current="page">{d.title}</span>
+      </nav>
+
+      <div class="project-header">
+        <div class="project-title">
+          <h1 style="margin:0 0 8px">{d.title}</h1>
+          {d.subtitle && (
+            <div class="subtitle" style="margin:0 0 50px;font-size:1.1rem;color:var(--muted);">
+              {d.subtitle}
+            </div>
+          )}
+          <dl class="info-grid" aria-label="Informations clés du projet">
+            {d.city && (
+              <>
+                <dt>Ville</dt>
+                <dd>{d.city}</dd>
+              </>
+            )}
+            <dt>Phase</dt>
+            <dd>{d.status}</dd>
+            {d.surface && (
+              <>
+                <dt>Surface</dt>
+                <dd>{d.surface}</dd>
+              </>
+            )}
+            {d.budget && (
+              <>
+                <dt>Budget</dt>
+                <dd>{d.budget}</dd>
+              </>
+            )}
+            {d['maitrise_ouvrage'] && (
+              <>
+                <dt>Maîtrise d’ouvrage</dt>
+                <dd>{d['maitrise_ouvrage']}</dd>
+              </>
+            )}
+            {d['maitre_oeuvre'] && (
+              <>
+                <dt>Maîtrise d’œuvre</dt>
+                <dd>{d['maitre_oeuvre']}</dd>
+              </>
+            )}
+            {d['bureau_etude'] && (
+              <>
+                <dt>Bureaux d’études</dt>
+                <dd>
+                  {Array.isArray(d['bureau_etude']) ? (
+                    <div>
+                      {d['bureau_etude'].map((item: string) => (
+                        <div>{item}</div>
+                      ))}
+                    </div>
+                  ) : (
+                    d['bureau_etude']
+                  )}
+                </dd>
+              </>
+            )}
+            {d['entreprise'] && (
+              <>
+                <dt>Entreprise générale</dt>
+                <dd>{d['entreprise']}</dd>
+              </>
+            )}
+                        {d['photographies'] && (
+              <>
+                <dt>Photographies</dt>
+                <dd>{d['photographies']}</dd>
+              </>
+            )}
+
+          </dl>
+        </div>
+        <aside class="project-aside">
+          {d.cover && (
+            <img
+              src={d.cover.src}
+              alt={`Image principale — ${d.title}`}
+              loading="eager"
+            />
+          )}
+        </aside>
+      </div>
+
+      <article class="prose" style="margin:12px 0 24px">
+        <slot />
+      </article>
+
+      {gallery?.length > 0 && (
+        <section
+          aria-label="Galerie d’images du projet"
+          style="margin:24px 0 40px"
+        >
+          <div id="pswp-gallery" class="gallery">
+            {gallery.map((g: any) => (
+              <a
+                href={g.src}
+                data-pswp-width={g.width}
+                data-pswp-height={g.height}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`Agrandir l’image de ${d.title}`}
+              >
+                <img src={g.src} alt={d.title} loading="lazy" />
+              </a>
+            ))}
+            
+          </div>
+          <script>
+            import PhotoSwipeLightbox from 'photoswipe/lightbox';
+            import 'photoswipe/style.css';
+            const lightbox = new PhotoSwipeLightbox({
+              gallery: '#pswp-gallery',
+              children: 'a',
+              pswpModule: () => import('photoswipe'),
+            });
+            lightbox.init();
+          </script>
+        </section>
+        
+      )}
+
+      {(prev || next) && (
+        <nav
+          style="display:flex;justify-content:space-between;gap:16px;margin:14px 0 30px"
+          aria-label="Navigation projets"
+        >
+          <div>
+            {prev && <a href={`/projets/${prev.id}`}>&larr; {prev.data.title}</a>}
+          </div>
+          <div>
+            {next && <a href={`/projets/${next.id}`}>{next.data.title} &rarr;</a>}
+          </div>
+        </nav>
+      )}
+
+    </main>
+    <Footer />
+  </body>
+</html>

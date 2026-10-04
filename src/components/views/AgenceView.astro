@@ -1,0 +1,56 @@
+---
+// Rendu de la page Agence. Utilisé par /agence et par l'aperçu de l'admin.
+// data : frontmatter (cover et associates[].photo au format { src }). Le corps est passé en slot.
+import '../../styles/global.css';
+import SEO from '../SEO.astro';
+import Header from '../Header.astro';
+import Footer from '../Footer.astro';
+
+const { data: d } = Astro.props;
+---
+<html lang="fr">
+  <head>
+    <SEO title={d.title} description={d?.seo?.description} image={d.cover?.src} />
+  </head>
+  <body>
+    <Header />
+    <main class="container prose about">
+     {d.cover && (
+        <img src={d.cover.src} alt={d.title} style="width:100%;height:auto;display:block;margin-bottom:2rem;" />
+      )}
+      <slot />
+      <section class="team" aria-label="Associés de l’agence" id="associes">
+        <h2 class="team-title">Nous contacter</h2>
+        <div class="team-grid">
+          {(Array.isArray(d.associates) ? d.associates : (Array.isArray(d.members) ? d.members : [])).map((associate: any) => (
+            <article class="member">
+              <div class="photo-wrap">
+                {associate?.photo && <img src={associate.photo.src} alt={`Portrait de ${associate?.name || ''}`} loading="lazy" />}
+              </div>
+              <div class="member-body">
+                <h3 class="member-name">{associate.name}</h3>
+                {associate?.role && <p class="member-role">{associate.role}</p>}
+                {associate?.bio && <p class="member-bio">{associate.bio}</p>}
+                <p class="member-links" aria-label="Réseaux & documents">
+                  {associate?.links?.linkedin || associate?.linkedin ? (
+                    <a href={associate?.links?.linkedin || associate?.linkedin} target="_blank" rel="noreferrer noopener" class="link">LinkedIn</a>
+                  ) : null}
+                   </p>
+                   <p class="member-links" aria-label="Réseaux & documents">
+                  {associate?.email ? (
+                    <a href={`mailto:${associate.email}`} class="link">Email</a>
+                  ) : null}</p>
+                  <p class="member-links cv">
+                  {associate?.cv ? (
+                    <a href={associate.cv} class="cv" download>Télécharger le CV</a>
+                  ) : null}
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    </main>
+    <Footer />
+  </body>
+</html>

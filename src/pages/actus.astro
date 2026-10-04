@@ -3,9 +3,9 @@ import '../styles/global.css';
 import SEO from '../components/SEO.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { getCollection } from 'astro:content';
+import { getPublished } from '../lib/published';
 
-const posts = (await getCollection('posts')).sort((a,b)=>
+const posts = (await getPublished('posts')).sort((a,b)=>
   new Date(b?.data?.date || '1970-01-01').getTime() - new Date(a?.data?.date || '1970-01-01').getTime()
 );
 const list = posts.map(p => {

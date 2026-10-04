@@ -110,3 +110,16 @@ describe('année', () => {
   it('accepte une période', () => expect(validate('project', { title: 'x', year: '2012-2016' }).ok).toBe(true));
   it('refuse du texte libre', () => expect(validate('project', { title: 'x', year: 'bientôt' }).ok).toBe(false));
 });
+
+describe('fichiers atypiques', () => {
+  it('BOM en tête de fichier', () => {
+    const r = parseEntry('﻿---\ntitle: T\n---\nCorps');
+    expect(r.data.title).toBe('T');
+    expect(r.body).toBe('Corps');
+  });
+  it('frontmatter vide', () => {
+    const r = parseEntry('---\n---\nCorps');
+    expect(r.data).toEqual({});
+    expect(r.body).toBe('Corps');
+  });
+});

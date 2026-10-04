@@ -22,18 +22,25 @@ export class ValidationError extends Error {
 
 const LABEL: Record<Kind, string> = { project: 'projet', post: 'actualité', agence: 'page Agence' };
 
-// Remplace récursivement les valeurs "upload:<id>" par le chemin final du fichier.
-function replaceRefs(value: any, refs: Map<string, string>): any {
-  if (typeof value === 'string' && value.startsWith('upload:')) {
-    const ref = refs.get(value.slice('upload:'.length));
-    if (!ref) throw new Error('Une image envoyée est introuvable ou a expiré. Ajoutez-la à nouveau.');
-    return ref;
+// Remplace les valeurs "upload:<id>" des champs fichier par le chemin final.
+// Les autres champs (titre, texte…) ne sont jamais interprétés.
+function resolveRef(value: unknown, refs: Map<string, string>): unknown {
+  if (typeof value !== 'string' || !value.startsWith('upload:')) return value;
+  const ref = refs.get(value.slice('upload:'.length));
+  if (!ref) throw new Error('Une image envoyée est introuvable ou a expiré. Ajoutez-la à nouveau.');
+  return ref;
+}
+
+function replaceRefs(data: Data, refs: Map<string, string>): Data {
+  const d = { ...data };
+  for (const k of ['cover', 'image']) if (k in d) d[k] = resolveRef(d[k], refs);
+  if (Array.isArray(d.gallery)) d.gallery = d.gallery.map((g: unknown) => resolveRef(g, refs));
+  if (Array.isArray(d.associates)) {
+    d.associates = d.associates.map((a: any) =>
+      a && typeof a === 'object' ? { ...a, photo: resolveRef(a.photo, refs), cv: resolveRef(a.cv, refs) } : a,
+    );
   }
-  if (Array.isArray(value)) return value.map((v) => replaceRefs(v, refs));
-  if (value && typeof value === 'object') {
-    return Object.fromEntries(Object.entries(value).map(([k, v]) => [k, replaceRefs(v, refs)]));
-  }
-  return value;
+  return d;
 }
 
 // Dossiers où l'admin a le droit de supprimer des fichiers pour ce contenu.

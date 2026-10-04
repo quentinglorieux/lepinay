@@ -6,8 +6,13 @@ import { createMarkdownProcessor } from '@astrojs/markdown-remark';
 import ProjectView from '../../../components/views/ProjectView.astro';
 import PostView from '../../../components/views/PostView.astro';
 import AgenceView from '../../../components/views/AgenceView.astro';
+import { checkOrigin } from '../../../lib/admin/api';
 
 export const prerender = false;
+
+// Défense en profondeur : le middleware protège déjà /admin.
+if (!Astro.locals.user) return new Response('Session expirée', { status: 401 });
+if (!checkOrigin(Astro.request)) return new Response('Origine refusée', { status: 403 });
 
 const type = Astro.params.type;
 if (Astro.request.method !== 'POST' || !['project', 'post', 'agence'].includes(type ?? '')) {

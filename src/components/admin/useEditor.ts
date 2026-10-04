@@ -223,7 +223,8 @@ export function useEditor(kind: Kind, initialSlug: string) {
 
   async function remove() {
     if (kind === 'agence' || !sha.value) return;
-    if (!confirm(`Supprimer définitivement « ${data.title} » ? Cette action retire aussi ses images.`)) return;
+    const detail = kind === 'project' ? ' Ses photos seront aussi supprimées.' : '';
+    if (!confirm(`Supprimer définitivement « ${data.title} » ?${detail}`)) return;
     saving.value = 'delete';
     try {
       await api.remove(kind, slug.value, sha.value);

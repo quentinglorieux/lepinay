@@ -129,3 +129,24 @@ describe('buildChanges', () => {
     expect(r.message).toBe('Admin : publication actualité « N »');
   });
 });
+
+describe('références upload: limitées aux champs image', () => {
+  it('un titre qui commence par « upload: » reste du texte', async () => {
+    const r = await buildChanges(base({ data: { title: 'upload: nouveautés', subtitle: 'upload:x' } }), get, []);
+    expect(mdOf(r).data.title).toBe('upload: nouveautés');
+    expect(mdOf(r).data.subtitle).toBe('upload:x');
+  });
+  it('photo et CV des associés sont bien remplacés', async () => {
+    const r = await buildChanges(
+      base({
+        kind: 'agence',
+        slug: '',
+        data: { title: 'Agence', associates: [{ name: 'G', photo: `upload:${U1}`, cv: `upload:${U3}` }] },
+        added: [{ id: U1, name: 'g.jpg' }, { id: U3, name: 'cv.pdf', field: 'cv' }],
+      }),
+      get,
+      [],
+    );
+    expect(mdOf(r).data.associates[0]).toMatchObject({ photo: './images/g.jpg', cv: '/cv/cv.pdf' });
+  });
+});

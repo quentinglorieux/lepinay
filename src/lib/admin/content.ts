@@ -25,13 +25,14 @@ const KEY_ORDER: Record<Kind, string[]> = {
 
 // ---------------------------------------------------------------- lecture / écriture
 
-const FRONTMATTER = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?/;
+const FRONTMATTER = /^---\r?\n(?:([\s\S]*?)\r?\n)?---\r?\n?/;
 
 export function parseEntry(raw: string): { data: Data; body: string } {
+  raw = raw.replace(/^\uFEFF/, '');
   const m = raw.match(FRONTMATTER);
   if (!m) return { data: {}, body: raw };
   // CORE_SCHEMA : les dates AAAA-MM-JJ restent des chaînes (pas d'objet Date).
-  const data = (load(m[1], { schema: CORE_SCHEMA }) as Data) ?? {};
+  const data = m[1]?.trim() ? ((load(m[1], { schema: CORE_SCHEMA }) as Data) ?? {}) : {};
   return { data, body: raw.slice(m[0].length) };
 }
 

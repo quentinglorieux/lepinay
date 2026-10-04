@@ -32,7 +32,7 @@ const cats = (d.categories || []).join(', ');
         image: d.cover?.src || undefined,
         about: cats || undefined,
         creator: { '@type': 'Organization', name: 'Lépinay Champlois Architecture' },
-      })}
+      }).replace(/</g, '\\u003c')}
     />
   </head>
   <body>

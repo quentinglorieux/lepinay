@@ -63,3 +63,12 @@ export async function readEntry(cfg: RepoConfig, kind: Kind, slug: string) {
   const files = media.filter((m) => m.type === 'file' && IMAGE.test(m.name)).map((m) => m.path).sort();
   return { slug, sha: f.sha, data, body, files };
 }
+
+// Tous les fichiers d'un dossier du repo, sous-dossiers compris.
+export async function listFilesDeep(cfg: RepoConfig, dir: string): Promise<string[]> {
+  const items = await listDir(cfg, dir);
+  const nested = await Promise.all(
+    items.map((i) => (i.type === 'dir' ? listFilesDeep(cfg, i.path) : Promise.resolve([i.path]))),
+  );
+  return nested.flat();
+}

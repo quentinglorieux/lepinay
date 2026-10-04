@@ -1,0 +1,9 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import ProjectEditor from '../../../components/admin/ProjectEditor.vue';
+export const prerender = false;
+const slug = decodeURIComponent(Astro.params.slug ?? '');
+---
+<AdminLayout title="Projet" section="projets" wide>
+  <ProjectEditor client:only="vue" slug={slug} />
+</AdminLayout>

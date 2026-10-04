@@ -1,0 +1,8 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import AgenceEditor from '../../components/admin/AgenceEditor.vue';
+export const prerender = false;
+---
+<AdminLayout title="Page Agence" section="agence" wide>
+  <AgenceEditor client:only="vue" />
+</AdminLayout>

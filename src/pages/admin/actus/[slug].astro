@@ -1,0 +1,9 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import PostEditor from '../../../components/admin/PostEditor.vue';
+export const prerender = false;
+const slug = decodeURIComponent(Astro.params.slug ?? '');
+---
+<AdminLayout title="Actualité" section="actus" wide>
+  <PostEditor client:only="vue" slug={slug} />
+</AdminLayout>

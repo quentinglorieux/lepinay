@@ -6,14 +6,8 @@ import { z } from 'astro/zod';
 export type Kind = 'project' | 'post' | 'agence';
 export type Data = Record<string, any>;
 
-export const PROJECT_CATEGORIES = [
-  'Construction',
-  'Réhabilitation',
-  'Logements',
-  'Équipements',
-  'Médiathèque',
-  'Musée',
-] as const;
+import { PROJECT_CATEGORIES, slugify } from './shared';
+export { PROJECT_CATEGORIES, slugify };
 
 // Dossiers de projets créés avant l'admin, dont le nom sort du format des slugs.
 export const LEGACY_SLUGS = ['Helene Berr', 'Lisieux'];
@@ -74,18 +68,6 @@ export function serializeEntry(data: Data, body: string, kind: Kind): string {
 }
 
 // ---------------------------------------------------------------- slugs et chemins
-
-export function slugify(title: string): string {
-  const s = title
-    .normalize('NFD')
-    .replace(/[̀-ͯ]/g, '')
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-    .slice(0, 80)
-    .replace(/-+$/, '');
-  return s || `projet-${Date.now()}`;
-}
 
 export function isValidSlug(slug: string): boolean {
   return /^[a-z0-9][a-z0-9-]{0,79}$/.test(slug) || LEGACY_SLUGS.includes(slug);

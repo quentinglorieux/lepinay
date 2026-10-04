@@ -1,7 +1,8 @@
 ---
 import AdminLayout from '../../layouts/AdminLayout.astro';
+import Dashboard from '../../components/admin/Dashboard.vue';
 export const prerender = false;
 ---
 <AdminLayout title="Tableau de bord" section="accueil">
-  <h1>Bonjour {Astro.locals.user?.name}</h1>
+  <Dashboard client:load name={Astro.locals.user?.name ?? ''} />
 </AdminLayout>

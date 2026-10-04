@@ -1,0 +1,8 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import EntryList from '../../../components/admin/EntryList.vue';
+export const prerender = false;
+---
+<AdminLayout title="Actualités" section="actus">
+  <EntryList client:only="vue" kind="post" />
+</AdminLayout>

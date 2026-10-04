@@ -1,0 +1,35 @@
+---
+// Aperçu d'un contenu en cours d'édition, rendu avec les mêmes vues que le site.
+// POST { data, body } : les images de data sont déjà des URL affichables
+// (blob: pour les nouvelles, /api/admin/file?path=... pour les existantes).
+import { createMarkdownProcessor } from '@astrojs/markdown-remark';
+import ProjectView from '../../../components/views/ProjectView.astro';
+import PostView from '../../../components/views/PostView.astro';
+import AgenceView from '../../../components/views/AgenceView.astro';
+
+export const prerender = false;
+
+const type = Astro.params.type;
+if (Astro.request.method !== 'POST' || !['project', 'post', 'agence'].includes(type ?? '')) {
+  return new Response('Méthode ou type invalide', { status: 400 });
+}
+
+const { data = {}, body = '' } = await Astro.request.json().catch(() => ({}));
+const md = await createMarkdownProcessor();
+const { code: html } = await md.render(String(body));
+
+const img = (v: unknown) => (typeof v === 'string' && v ? { src: v, width: 1600, height: 1200 } : undefined);
+const d = { ...data };
+let gallery: Array<{ src: string; width: number; height: number }> = [];
+if (type === 'project') {
+  d.cover = img(d.cover);
+  gallery = (Array.isArray(d.gallery) ? d.gallery : []).map(img).filter(Boolean) as typeof gallery;
+}
+if (type === 'agence') {
+  d.cover = img(d.cover);
+  d.associates = (Array.isArray(d.associates) ? d.associates : []).map((a: any) => ({ ...a, photo: img(a?.photo) }));
+}
+---
+{type === 'project' && <ProjectView data={d} gallery={gallery}><Fragment set:html={html} /></ProjectView>}
+{type === 'post' && <PostView data={d}><Fragment set:html={html} /></PostView>}
+{type === 'agence' && <AgenceView data={d}><Fragment set:html={html} /></AgenceView>}

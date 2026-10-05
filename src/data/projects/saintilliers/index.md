@@ -1,22 +1,28 @@
 ---
-title: Ecole élémentaire, commerce, restaurant et place du village.
+title: Ecole élémentaire, commerce, restaurant et place du village
 subtitle: Réhabilitation d'une longère en coeur de village
 status: Livré 2016
 year: 2012-2016
-city: Saint-Illiers-la-Ville (78) 
+city: Saint-Illiers-la-Ville (78)
 country: FR
 surface: 670 m2 et 2080 m2 d’espace public
 budget: 1 758 000 € HT
-photographies : Pierre Lépinay Architecture, Ana Lefaux, et Patrick Tourneboeuf pour les photographies de maquettes
-maitrise_ouvrage : Commune de Saint-Illiers-la-Ville
-maitre_oeuvre : Pierre Lépinay Architecture
-bureau_etude : Cabinet Lanoy
-entreprise générale : SGM, Société Générale de maçonnerie 
-categories: [Réhabilitation, Équipements]
-tags: [Pierre, Réhabilitation, Bâti ancien, Équipements]
+photographies: Pierre Lépinay Architecture, Ana Lefaux, et Patrick Tourneboeuf pour les photographies de maquettes
+maitrise_ouvrage: Commune de Saint-Illiers-la-Ville
+maitre_oeuvre: Pierre Lépinay Architecture
+bureau_etude: Cabinet Lanoy
+categories:
+  - Réhabilitation
+  - Équipements
+tags:
+  - Pierre
+  - Réhabilitation
+  - Bâti ancien
+  - Équipements
 cover: ./cover.jpg
 seo:
   description: Réhabilitation d'une longère.
+entreprise générale: SGM, Société Générale de maçonnerie
 ---
 
 ## Situation 
@@ -39,4 +45,3 @@ Au rez-de-chaussée, l’accès se fait par un préau couvert situé dans une pa
 La partie nord, accueille les activités de commerce. La halle couverte, le commerce, la salle de restaurant et la cuisine occupent la moitié de la longère. Cette fois ci, une verrière en toiture amène la lumière au coeur du projet.
 
 La place créée entre la longère et la Mairie s’organise comme une liaison et crée une continuité entre le chemin venant de la mairie, le chemin des écoliers, la rue de Bréval et l‘angle sud-est du site.
-

@@ -1,5 +1,5 @@
 ---
-title: Construction de 12 logements à Paris 16ème
+title: Construction de 12 logements
 subtitle: Transformation d'un garage en logements
 status: Livré
 year: 2013

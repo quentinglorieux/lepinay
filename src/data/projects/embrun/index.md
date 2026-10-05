@@ -1,7 +1,6 @@
 ---
 title: Construction de logements à Embrun
 subtitle: Construction de logements neufs
-draft: true
 status: En cours
 year: 2021
 city: Embrun (05)

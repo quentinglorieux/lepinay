@@ -1,6 +1,6 @@
 ---
 title: Construction de 57 logements sociaux
-status: Livré
+status: Livré 2016
 year: 2016
 city: Bruyères-sur-Oise (95)
 surface: 3 392m²

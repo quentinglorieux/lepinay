@@ -1,22 +1,30 @@
 ---
-title: Réhabilitation de 16 logements 
+title: Réhabilitation de 16 logements à Arcueil
 subtitle: Réhabilitation lourde et surélévation de 2 bâtiments anciens
 status: Chantier en cours
-year: 2025
+year: 2026
 city: Arcueil (94)
 country: FR
 surface: 1159m² SDP
 budget: 2 700 000 € HT
-photographies : Pierre Lépinay Architecture
-maitrise_ouvrage : Immobilière 3F
-maitre_oeuvre : Pierre Lépinay Architecture
-bureau_etude : [CAPET Ingénierie – Fluides et Thermique, DEMO – Structure, CECPAD - Economiste]
+photographies: Pierre Lépinay
+maitrise_ouvrage: Immobilière 3F
+maitre_oeuvre: Lépinay Champlois Architecture
+bureau_etude:
+  - CAPET Ingénierie – Fluides et Thermique
+  - DEMO – Structure
+  - CECPAD - Economiste
 entreprise: Re-Ab
-categories: [Réhabilitation, Logements]
-tags: [bois, réhabilitation]
+categories:
+  - Réhabilitation
+  - Logements
+tags:
+  - bois
+  - réhabilitation
+  - logements
 cover: ./cover.jpg
 seo:
-  description: 
+  description: Réhabilitation lourde et surélévation de 2 bâtiments anciens Arcueil I3F
 ---
 
 ## Situation

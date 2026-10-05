@@ -1,7 +1,6 @@
 ---
 title: Démarrage du chantier de logements à Triel-sur-Seine
 subtitle: 59 logements
-draft: true
 city: Triel-sur-Seine (78)
 date: 2025-01-01
 tags:

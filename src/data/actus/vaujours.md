@@ -1,7 +1,6 @@
 ---
 title: Démarrage du chantier de 47 logements à Vaujours
 subtitle: Mise en place d'un système de panneaux préfabriqués en béton de chanvre
-draft: true
 city: Vaujours (93)
 date: 2025-01-01
 tags:

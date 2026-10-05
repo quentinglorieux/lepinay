@@ -23,6 +23,18 @@ tags:
   - réhabilitation
   - logements
 cover: ./cover.jpg
+gallery:
+  - ./images/000013450005.jpg
+  - ./images/000013450006.jpg
+  - ./images/000013450007.jpg
+  - ./images/000013450009.jpg
+  - ./images/000013450010.jpg
+  - ./images/000014620001.jpg
+  - ./images/000014620002.jpg
+  - ./images/000014620004.jpg
+  - ./images/000014620005.jpg
+  - ./images/000014620007.jpg
+  - ./images/000014620008.jpg
 seo:
   description: Réhabilitation lourde et surélévation de 2 bâtiments anciens Arcueil I3F
 ---

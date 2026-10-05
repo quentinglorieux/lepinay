@@ -1,13 +1,15 @@
 ---
-title: Démarrage du chantier de construction
+title: Démarrage du chantier de 22 logements à La Frette-sur-Seine
 subtitle: 22 logements
 city: La Frette-sur-Seine (95)
 date: 2025-01-01
-tags: [prix]
-categories: [chantier]
+tags:
+  - prix
+categories:
+  - chantier
 image: ./images/lafrette.jpg
-
 ---
+
 - Maître d’ouvrage : Immobilière 3F
 - Maîtrise d'oeuvre : Pierre Lépinay Architecture mandataire / Cobalt Architectes co-traitant
 - Bureau d’études généraliste : ANA Ingénierie
